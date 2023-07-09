@@ -1,8 +1,11 @@
 package br.com.uanderson.blackboxannotations.service;
 
+import br.com.uanderson.blackboxannotations.dto.FuncionarioPostRequestBody;
+import br.com.uanderson.blackboxannotations.dto.FuncionarioPutRequestBody;
 import br.com.uanderson.blackboxannotations.model.Funcionario;
 import br.com.uanderson.blackboxannotations.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,17 +29,19 @@ public class FuncionarioService {
                       String.format("Funcionário, não encontrado pelo id '%d' informado", id))
                 );
     }
+    //salvar a data como data é mudar somente a apresentação dela para o usuário
+    //encriptografar a senha
+    public Funcionario save(FuncionarioPostRequestBody funcionarioPostRequestBody){
+        var newFuncionario = new Funcionario();
+        BeanUtils.copyProperties(funcionarioPostRequestBody, newFuncionario);
 
-    public Funcionario save(Funcionario funcionarioRequest){
-        //salvar a data como data é mudar somente a apresentação dela para o usuário
-        //encriptografar a senha
         Funcionario funcionario = Funcionario.builder()
-                .nome(funcionarioRequest.getNome())
-                .login(funcionarioRequest.getLogin())
-                .cargo(funcionarioRequest.getCargo())
-                .senha(funcionarioRequest.getSenha())
-                .dataNascimento(funcionarioRequest.getDataNascimento())
-                .permissao(funcionarioRequest.getPermissao())
+                .nome(newFuncionario.getNome())
+                .login(newFuncionario.getLogin())
+                .cargo(newFuncionario.getCargo())
+                .senha(newFuncionario.getSenha())
+                .dataNascimento(newFuncionario.getDataNascimento())
+                .permissao(newFuncionario.getPermissao())
                 .build();
 
         return funcionarioRepository.save(funcionario);
@@ -46,8 +51,11 @@ public class FuncionarioService {
         funcionarioRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-    public void update(Funcionario funcionarioRequest){
-        Funcionario funcionarioSalvo = findByIdOrThrowBadRequestException(funcionarioRequest.getId());
+    public void update(FuncionarioPutRequestBody funcionarioPutRequestBody){
+        var newFuncionario = new Funcionario();
+        BeanUtils.copyProperties(funcionarioPutRequestBody, newFuncionario);
+
+        Funcionario funcionarioSalvo = findByIdOrThrowBadRequestException(newFuncionario.getId());
         Funcionario funcionario = Funcionario.builder()
                 .id(funcionarioSalvo.getId())
                 .nome(funcionarioSalvo.getNome())

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,7 +31,7 @@ public class Funcionario implements Serializable {
     @NotEmpty(message = "Este campo não pode ser vazio!")
     private String cargo;
     @PastOrPresent(message = "Você nasceu no futuro? ")
-    private LocalDateTime dataNascimento;
+    private LocalDate dataNascimento;
     private String permissao;//ROLES_ADMIN, ROLES_USER
 
 

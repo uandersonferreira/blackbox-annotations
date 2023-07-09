@@ -1,13 +1,18 @@
 package br.com.uanderson.blackboxannotations.controller;
 
+import br.com.uanderson.blackboxannotations.dto.FuncionarioPostRequestBody;
+import br.com.uanderson.blackboxannotations.dto.FuncionarioPutRequestBody;
 import br.com.uanderson.blackboxannotations.model.Funcionario;
 import br.com.uanderson.blackboxannotations.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.beans.BeanProperty;
 
 @RestController
 @RequestMapping("/v1/funcionarios")
@@ -26,8 +31,8 @@ public class FuncionarioController {
     }
 
     @PostMapping(path = "/save")
-    public ResponseEntity<Funcionario> save(@RequestBody Funcionario funcionario){
-        return new ResponseEntity<>(funcionarioService.save(funcionario), HttpStatus.CREATED);
+    public ResponseEntity<Funcionario> save(@RequestBody FuncionarioPostRequestBody funcionarioPostRequestBody){
+        return new ResponseEntity<>(funcionarioService.save(funcionarioPostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/delete/{id}")
@@ -37,8 +42,8 @@ public class FuncionarioController {
     }
 
     @PutMapping(path = "/update")
-    public ResponseEntity<Void> update(@RequestBody Funcionario funcionario){
-        funcionarioService.update(funcionario);
+    public ResponseEntity<Void> update(@RequestBody FuncionarioPutRequestBody funcionarioPutRequestBody){
+        funcionarioService.update(funcionarioPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
