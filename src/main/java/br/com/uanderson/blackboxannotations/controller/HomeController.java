@@ -1,17 +1,23 @@
 package br.com.uanderson.blackboxannotations.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping(path = {"/v1/home"})
+@Controller
+@RequestMapping(path = {"/"})
 public class HomeController {
+
     @GetMapping
-    public ResponseEntity<String> home(){
-        return new ResponseEntity<>("Hello, world", HttpStatus.OK);
+    public String home() {
+        return "index";
+    }
+    @GetMapping(path = "/login")
+    public String login() {
+        return "login";
+    }    @GetMapping(path = "/login/registrar")
+    public String registrar() {
+        return "registrar";
     }
 
 
