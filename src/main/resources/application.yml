@@ -15,4 +15,4 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
-        type: TRACE
+
