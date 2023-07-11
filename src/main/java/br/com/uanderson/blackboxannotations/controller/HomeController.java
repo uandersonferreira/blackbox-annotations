@@ -15,11 +15,17 @@ public class HomeController {
     @GetMapping(path = "/login")
     public String login() {
         return "login";
-    }    @GetMapping(path = "/login/registrar")
+    }
+
+    @GetMapping(path = "/login/registrar")
     public String registrar() {
         return "registrar";
     }
 
+    @GetMapping(path = "/layout")
+    public String layout() {
+        return "fragments/_layout";
+    }
 
 
 
