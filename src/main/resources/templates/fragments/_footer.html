@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-</head>
-<body>
-
-<footer layout:fragment="content">
-    <div class="container">
-        <p>&copy; 2023 Uanderson Ferreira. Todos os direitos reservados.</p>
-    </div>
-</footer>
-</body>
-</html>
+<div th:fragment="footer">
+        <footer id="sticky-footer" class="flex-shrink-0 py-1 bg-dark text-white-50" >
+                <div class="container text-center">
+                        <small>Copyright &copy; Uanderson Ferreira de Oliveira</small>
+                </div>
+        </footer>
+        <!-- Link JS -->
+<!--        <script th:src="@{js/script_layout.js}"></script>-->
+</div>

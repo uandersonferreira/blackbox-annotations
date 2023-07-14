@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FuncionarioService {
@@ -20,6 +22,10 @@ public class FuncionarioService {
 
     public Page<Funcionario> listAllPageable(Pageable pageable) {
         return funcionarioRepository.findAll(pageable);
+    }
+
+    public List<Funcionario> listAllNoPageable() {
+        return funcionarioRepository.findAll();
     }
 
     public Funcionario findByIdOrThrowBadRequestException(long id) {
@@ -31,20 +37,17 @@ public class FuncionarioService {
     }
     //salvar a data como data é mudar somente a apresentação dela para o usuário
     //encriptografar a senha
-    public Funcionario save(FuncionarioPostRequestBody funcionarioPostRequestBody){
-        var newFuncionario = new Funcionario();
-        BeanUtils.copyProperties(funcionarioPostRequestBody, newFuncionario);
-
-        Funcionario funcionario = Funcionario.builder()
-                .nome(newFuncionario.getNome())
-                .login(newFuncionario.getLogin())
-                .cargo(newFuncionario.getCargo())
-                .senha(newFuncionario.getSenha())
-                .dataNascimento(newFuncionario.getDataNascimento())
-                .permissao(newFuncionario.getPermissao())
+    public Funcionario save(Funcionario funcionario){
+        Funcionario newFuncionario = Funcionario.builder()
+                .nome(funcionario.getNome())
+                .login(funcionario.getLogin())
+                .cargo(funcionario.getCargo())
+                .senha(funcionario.getSenha())
+                .dataNascimento(funcionario.getDataNascimento())
+                .permissao(funcionario.getPermissao())
                 .build();
 
-        return funcionarioRepository.save(funcionario);
+        return funcionarioRepository.save(newFuncionario);
     }
 
     public void delete(long id){
