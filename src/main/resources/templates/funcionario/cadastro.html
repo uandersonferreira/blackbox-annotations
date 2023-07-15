@@ -15,80 +15,79 @@
 	                        <li class="nav-item active">
 								<i class="fa-solid fa-angles-right"></i>
 	                            <span>Cadastrar Funcionários</span>
-	                        </li>
-	                    </ul>
-	                </div>
-	                <a class="btn btn-primary btn-md" th:href="@{/v1/app/cpd/funcionarios/list}" role="button">
+							</li>
+						</ul>
+					</div>
+					<a class="btn btn-primary btn-md" th:href="@{/v1/app/cpd/funcionarios/list}" role="button">
 						<i class="fa-solid fa-list"></i>
-	                    <span>Listar Funcionários</span>
-	                </a>
-	            </nav>
-	        </div>
+						<span>Listar Funcionários</span>
+					</a>
+				</nav>
+			</div>
 
-	        <div class="container"  id="cadastro">
-	            <form th:action="@{/v1/app/cpd/funcionarios/save}" method="post"
-				th:object="${funcionario}">
-	                <div class="form-row">
-	                    <div class="form-group col-md-6">
-	                        <label for="nome">Nome do Funcionário</label>
-	                        <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-	                               autofocus="autofocus" th:field="*{nome}" value=""/>
-	                        <div class="invalid-feedback">
+			<div class="container m-5" id="cadastro">
+				<form th:action="${funcionario.id == null ? '/v1/app/cpd/funcionarios/save' : '/v1/app/cpd/funcionarios/update' }"
+					  method="post"
+					  th:object="${funcionario}">
 
-	                        </div>
-	                    </div>
+					<div class="form-row">
+						<input type="number" readonly="readonly" id="id" name="id" th:field="*{id}" />
+						<!--Verifica se o id é nulo ou se já contém algo o próprio framework(thymeleaf) que faz
+                        a distinção, para poder saber se é para alterar ou criar.
+                        -->
 
-						<div class="form-group col-md-6">
-	                        <label for="nome">login</label>
-	                        <input type="text" class="form-control" id="login" placeholder="login"
-	                               autofocus="autofocus" th:field="*{login}" value=""/>
-	                        <div class="invalid-feedback">
+						<div class="form-group col-md-6 mb-3">
+							<label for="nome">Nome do Funcionário</label>
+							<input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+								   autofocus="autofocus" name="nome" th:field="*{nome}" />
+							<div class="invalid-feedback">
 
-	                        </div>
-	                    </div>
+							</div>
+						</div>
+
+						<div class="form-group col-md-6 mb-3">
+							<label for="nome">login</label>
+							<input type="text" class="form-control" id="login" placeholder="login"
+								   autofocus="autofocus" name="login" th:field="*{login}" />
+							<div class="invalid-feedback">
+
+							</div>
+						</div>
 	                </div> <!--row-->
 
 	                <div class="form-row">
-	                    <div class="form-group col-md-6">
-	                        <label for="cargo">Cargo</label>
-	                        <select id="cargo" class="form-control" th:field="*{cargo}">
-	                            <option value="">Selecione...</option>
-	                            <option value="1">Auxiliar Contábil</option>
-	                            <option value="2">Auxiliar Administrativo</option>
-	                            <option value="3">Contador</option>
-	                            <option value="4">Adminitrador</option>
-	                            <option value="5">Programado PHP</option>
-	                            <option value="6">Desenvolvedor Java Jr.</option>
-	                            <option value="7">Desenvolvedor Java Pleno</option>
-	                            <option value="8">Desenvolvedor Java Senior</option>
-	                            <option value="9">Auxiliar de RH</option>
-	                            <option value="10">Coordenador de RH</option>
-	                            <option value="11">Psicologo</option>
-	                        </select>
-	                        <div class="invalid-feedback">
+						<div class="form-group col-md-6 mb-3">
+							<label for="cargo">Cargo</label>
+							<select id="cargo" class="form-control" name="cargo" th:field="*{cargo}">
+								<option value="">Selecione...</option>
+								<option value="Cpd">Cpd</option>
+								<option value="Repositor">Repositor</option>
+								<option value="Líder">Líder</option>
+								<option value="Gerente">Gerente</option>
+								<option value="Operador">Operador</option>
+							</select>
+							<div class="invalid-feedback">
 
 	                        </div>
 	                    </div>
 
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6 mb-3">
 							<label for="data_nascimento">Data Nascimento</label>
-							<input type="date" class="form-control" id="data_nascimento" name="data_nascimento"  th:field="*{dataNascimento}" value=""/>
-							<div class="invalid-feedback"> </div>
+							<input type="date" class="form-control" id="data_nascimento" name="data_nascimento"
+								   th:field="*{dataNascimento}" />
+							<div class="invalid-feedback"></div>
 						</div>
 	                </div>
 
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6 mb-3">
 							<label for="senha">Senha</label>
-							<input type="password" class="form-control" id="senha" name="senha"  th:field="*{senha}" value=""/>
-							<div class="invalid-feedback"> </div>
+							<input type="password" class="form-control" id="senha" name="senha" th:field="*{senha}"
+								   value=""/>
+							<div class="invalid-feedback"></div>
 						</div>
 					</div>
 
-					<input type="hidden" id="id" th:field="*{id}" value=""/>
-					<!--Verifica se o id é nulo ou se já contém algo o próprio framework(thymeleaf) que faz
-                    a distinção, para poder saber se é para alterar ou criar.
-                    -->
 					<button type="submit" class="btn btn-primary btn-sm col-md-12">Salvar</button>
 	            </form>
 	        </div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Pagination</title>
+</head>
+<body>
+
+<nav th:fragment="menuPagination" aria-label="...">
+        <ul class="page">
+            <a href="#page">
+                <li> Próximo</li>
+            </a>
+
+            <a href="#page">
+                <li>Voltar</li>
+            </a>
+
+            <a href="#page" class="active">
+                <li> 1</li>
+            </a>
+
+            <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
+                    <li th:unless="${currentPage != i}">[[${i}]]</li> &nbsp; &nbsp;
+            </a>
+
+        </ul>
+</nav>
+
+
+</body>
+</html>

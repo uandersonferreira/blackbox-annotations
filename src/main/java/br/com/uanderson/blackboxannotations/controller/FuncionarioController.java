@@ -9,10 +9,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 
 @Controller
@@ -22,17 +25,9 @@ public class FuncionarioController {
     private final FuncionarioService funcionarioService;
 
     @GetMapping(path = "/list")
-    public String listAllPageable(ModelMap modelMap,
-                                  @RequestParam(name = "page", defaultValue = "0") int page,
-                                  @RequestParam(name = "size", defaultValue = "8") int size) {
-
-        PageRequest pageRequest = PageRequest.of(page, size);
-        Page<Funcionario> funcionarios = funcionarioService.listAllPageable(pageRequest);
-        modelMap.addAttribute("funcionarios", funcionarios);
-        modelMap.addAttribute("paginas", new int[funcionarios.getTotalPages()]);
-
-        modelMap.addAttribute("paginaAtual", size);
-        return "funcionario/pagination";
+    public String listAllPageable(Model model) {
+        String keyword = "";
+        return findPaginated(1, "nome", "asc", keyword, model);
     }
 
     @GetMapping(path = "/cadastro")
@@ -55,9 +50,10 @@ public class FuncionarioController {
     }
 
 
-    @GetMapping(path = "/find-by/{id}")
-    public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(funcionarioService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
+    @GetMapping(path = "/editar/{id}")
+    public ModelAndView findByIdAndUpdate(@PathVariable Long id) {
+        Funcionario funcionario = funcionarioService.findByIdOrThrowBadRequestException(id);
+        return cadastro(funcionario);
     }
 
     @GetMapping(path = "/delete/{id}")
@@ -66,10 +62,39 @@ public class FuncionarioController {
         return new ModelAndView("redirect:/v1/app/cpd/funcionarios/list");
     }
 
-    @PutMapping(path = "/update")
-    public ResponseEntity<Void> update(@RequestBody FuncionarioPutRequestBody funcionarioPutRequestBody) {
-        funcionarioService.update(funcionarioPutRequestBody);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PostMapping("/update")
+    public ModelAndView update(Funcionario funcionario, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return cadastro(funcionario);
+
+        funcionarioService.update(funcionario);
+        return new ModelAndView("redirect:/v1/app/cpd/funcionarios/list");
     }
+
+    @GetMapping(path = "/page/{pageNow}")
+    public String findPaginated(@PathVariable(value = "pageNow") int pageNow,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                @RequestParam("keyword") String keyword,
+                                Model model) {
+        int pageSize = 5;
+
+        Page<Funcionario> page = funcionarioService.findAllPaginated(pageNow, pageSize, sortField, sortDir, keyword);
+        List<Funcionario> funcionarios = page.getContent();
+
+        model.addAttribute("currentPage", pageNow);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
+
+        model.addAttribute("funcionarios", funcionarios);
+
+        return "funcionario/listar_funcionario";
+    }
+
+
 
 }//class

@@ -30,64 +30,43 @@
     </div>
 
     <div class="container">
+        <!--Form de pesquisa-->
+        <nav class="navbar navbar-light bg-light mt-4">
+            <div class="container-fluid">
+                <form class="d-flex" th:action="@{/v1/app/cpd/funcionarios/page/1}">
+                    <input type="hidden" name="sortField" th:value="${sortField}"/>
+                    <input type="hidden" name="sortDir" th:value="${sortDir}"/>
 
-        <p>
-            <i class="oi oi-magnifying-glass"></i><span></span>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
-                    aria-controls="collapseNome">Nome
-            </button>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
-                    aria-controls="collapseCargo">Cargo
-            </button>
-        </p>
-        <div class="row">
-            <div class="col">
-                <div class="collapse" id="collapseNome">
-                    <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline" method="GET" th:action="@{/administrativo/funcionarios/buscar/nome}">
-                            <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-                                   name="nome"/>
-                            <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-                        </form>
-                    </nav>
-                </div>
+                    <input class="form-control" type="search" placeholder="Search" name="keyword" id="keyword" size="50"
+                           th:value="${keyword}" required aria-label="Search">
+                    <button class="btn btn-outline-success m-2" type="submit" value="pesquisar">Pesquisar</button>
+                    <button class="btn btn-outline-success m-2" type="submit" value="limpar" id="btnLimpar"
+                            onclick="limparPesquisa()">Limpar
+                    </button>
+                </form>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="collapse" id="collapseCargo">
+        </nav>
 
-                    <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline" method="GET" th:action="@{/administrativo/funcionarios/buscar/cargo}">
-                            <select class="form-control mr-sm-2" name="cargo" aria-label="Search">
-                                <option value="">Cargo</option>
-                                <option value="1">Auxiliar Contábil</option>
-                                <option value="2">Auxiliar Administrativo</option>
-                                <option value="3">Contador</option>
-                                <option value="4">Adminitrador</option>
-                                <option value="5">Programado PHP</option>
-                                <option value="6">Desenvolvedor Java Jr.</option>
-                                <option value="7">Desenvolvedor Java Pleno</option>
-                                <option value="8">Desenvolvedor Java Senior</option>
-                                <option value="9">Auxiliar de RH</option>
-                                <option value="10">Coordenador de RH</option>
-                                <option value="11">Psicologo</option>
-                            </select>
-                            <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-                        </form>
-                    </nav>
-
-                </div>
-            </div>
-        </div>
-
+        <!-- Tabela de Funcionários -->
         <div class="table-responsive">
             <table class="table table-striped table-hover table-sm">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Cargo</th>
+                    <th scope="col">
+                        <a th:href="@{'/v1/app/cpd/funcionarios/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}  + ${keyword != null ? '&keyword=' + keyword : '' }}">
+                            #
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a th:href="@{'/v1/app/cpd/funcionarios/page/' + ${currentPage} + '?sortField=nome&sortDir=' + ${reverseSortDir}  + ${keyword != null ? '&keyword=' + keyword : '' }}">
+                            Nome
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a th:href="@{'/v1/app/cpd/funcionarios/page/' + ${currentPage} + '?sortField=cargo&sortDir=' + ${reverseSortDir}  + ${keyword != null ? '&keyword=' + keyword : '' }}">
+                            Cargo
+                        </a>
+                    </th>
                     <th scope="col" colspan="2">Ações</th>
                 </tr>
                 </thead>
@@ -97,7 +76,7 @@
                     <td th:text="${f.nome}"></td>
                     <td th:text="${f.cargo}"></td>
                     <td>
-                        <a th:href="@{/v1/app/cpd/funcionarios/update}">
+                        <a th:href="@{/v1/app/cpd/funcionarios/editar/{id}(id=${f.id})}">
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td> <!--pessoas/edit/1 - CONTROLLER -->
@@ -113,24 +92,51 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
 
-        <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+<!--            <nav th:replace="~{fragments/_menuPagination :: menuPagination}"></nav>-->
+
+            <div th:if="${totalPages > 1}" class="page">
+                <div class="page-item-content">
+                    <span class="item-content">Total Rows: [[${totalPages}]]</span>
+                </div>
+
+                <div class="active page-item-content" th:each="i : ${#numbers.sequence(1, 1)}">
+                    <span th:unless="${currentPage != i}" class="item-content">[[${i}]]</span> &nbsp; &nbsp;
+                    <a th:if="${currentPage != i}"
+                    th:href="@{'/v1/app/cpd/funcionarios/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
+                </div>
+
+                <div class="page-item-content" th:each="i : ${#numbers.sequence(2, totalPages)}">
+                    <span th:unless="${currentPage != i}" class="item-content">[[${i}]]</span> &nbsp; &nbsp;
+                    <a th:if="${currentPage != i}"
+                       th:href="@{'/v1/app/cpd/funcionarios/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
+                </div>
+
+
+
+                <div class="page-item-content">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/v1/app/cpd/funcionarios/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Next</a>
+                    <span th:unless="${currentPage < totalPages}" class="item-content">Next</span> &nbsp; &nbsp;
+                </div>
+
+                <div class="page-item-content">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Last</a>
+                    <span th:unless="${currentPage < totalPages}" class="item-content">Last</span> &nbsp; &nbsp;
+                </div>
+
+            </div><!--Menu pagination-->
+
+
+        </div>
     </div>
+    <script>
+        //Limpar o botão de pesquisa
+        function limparPesquisa() {
+            window.location = "[[@{/v1/app/cpd/funcionarios/list}]]";
+        }
+    </script>
 </main>
 
 

@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -54,11 +56,9 @@ public class FuncionarioService {
         funcionarioRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-    public void update(FuncionarioPutRequestBody funcionarioPutRequestBody){
-        var newFuncionario = new Funcionario();
-        BeanUtils.copyProperties(funcionarioPutRequestBody, newFuncionario);
+    public void update(Funcionario funcionarioRequest){
+        Funcionario funcionarioSalvo = findByIdOrThrowBadRequestException(funcionarioRequest.getId());
 
-        Funcionario funcionarioSalvo = findByIdOrThrowBadRequestException(newFuncionario.getId());
         Funcionario funcionario = Funcionario.builder()
                 .id(funcionarioSalvo.getId())
                 .nome(funcionarioSalvo.getNome())
@@ -73,4 +73,17 @@ public class FuncionarioService {
 
     }
 
+    public Page<Funcionario> findAllPaginated(int pageNow, int pageSize, String sortField,
+                                          String sortDirection, String keyword) {
+
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        PageRequest pageRequest = PageRequest.of((pageNow - 1), pageSize, sort);
+
+        if (keyword != null) {
+            return funcionarioRepository.findAll(keyword, pageRequest);
+        }
+        return funcionarioRepository.findAll(pageRequest);
+    }
 }//class

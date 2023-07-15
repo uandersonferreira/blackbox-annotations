@@ -25,8 +25,8 @@
 
 <footer th:replace="~{fragments/_footer :: footer}"></footer>
 
-
-
+<script th:src="@{/webjars/jquery-mask-plugin/1.14.16/dist/jquery.mask.js}"></script>
+<script th:src="@{/webjars/popper.js/2.9.3/umd/popper.js}"></script>
 
 <script>
     const listItems = document.querySelectorAll(".sidebar-list li");
@@ -57,12 +57,12 @@
     });
 
     //-----------------------
-    $(function() {
+    $(function () {
         $('[data-toggle="popover"]').popover();
     });
 
-    $(document).ready(function(){
-        $(".navbar-toggle").click(function(){
+    $(document).ready(function () {
+        $(".navbar-toggle").click(function () {
             $(".sidebar").toggleClass("sidebar-open");
         })
     });
