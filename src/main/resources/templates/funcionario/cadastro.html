@@ -31,7 +31,7 @@
 					  th:object="${funcionario}">
 
 					<div class="form-row">
-						<input type="number" readonly="readonly" id="id" name="id" th:field="*{id}" />
+						<input type="hidden" readonly="readonly" id="id" name="id" th:field="*{id}" />
 						<!--Verifica se o id é nulo ou se já contém algo o próprio framework(thymeleaf) que faz
                         a distinção, para poder saber se é para alterar ou criar.
                         -->

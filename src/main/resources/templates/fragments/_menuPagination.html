@@ -6,36 +6,31 @@
     <title>Menu Pagination</title>
 </head>
 <body>
-
-<nav th:fragment="menuPagination" th:if = "${totalPages > 1}" aria-label="Pagination">
+    <nav aria-label="Pagination" th:if="${totalPages > 0}">
         <ul class="pagination justify-content-center">
-
             <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-                <a th:replace="fragments/paging :: paging(1, '<<', 'First Page')"></a>
-                <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
-
+                <a th:replace="fragments/paging :: paging(1, '<<', 'Primeira Página')"></a>
             </li>
-
-            <div class="col-sm-1">
-                    <span th:each="i : ${#numbers.sequence(1, totalPages)}">
-                        <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
-                        <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
-                    </span>
-            </div>
-
-            <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Next</a>
-                <span th:unless="${currentPage < totalPages}">Next</span> &nbsp; &nbsp;
-            </div>
-
-            <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Last</a>
-                <span th:unless="${currentPage < totalPages}">Last</span> &nbsp; &nbsp;
-            </div>
+            <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:replace="fragments/paging :: paging(${currentPage - 1}, 'Voltar', 'Voltar Página')"></a>
+            </li>
+            <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+                <a class="page-link" href="#">...</a>
+            </li>
+            <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+                <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Página ' + ${page})"></a>
+            </li>
+            <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+                <a class="page-link" href="#">...</a>
+            </li>
+            <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a th:replace="fragments/paging :: paging(${currentPage + 1},'Proximo', 'Proxima Página')"></a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a th:replace="fragments/paging :: paging(${totalPages}, '>>', 'Última Página')"></a>
+            </li>
         </ul>
-    </div>
-</nav>
-
-
+    </nav><!--Menu pagination-->
 </body>
 </html>

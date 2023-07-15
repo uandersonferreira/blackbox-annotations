@@ -11,8 +11,16 @@
 <!-- ============= Home Section =============== -->
 <section class="home">
     <div class="toggle-sidebar">
-        <i class='bx bx-menu'></i>
-        <div class="text">Menu</div>
+        <div class="menu-icon">
+            <i class='bx bx-menu'></i>
+            <div class="text">Menu</div>
+        </div>
+
+        <div class="date-time">
+            <span th:text="${myDate}"></span>
+            <span th:text="${myTime}"> </span>
+        </div>
+
     </div>
 
     <main class="layout-content" layout:fragment="corpo">
