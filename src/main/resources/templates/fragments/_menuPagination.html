@@ -7,25 +7,33 @@
 </head>
 <body>
 
-<nav th:fragment="menuPagination" aria-label="...">
-        <ul class="page">
-            <a href="#page">
-                <li> Próximo</li>
-            </a>
+<nav th:fragment="menuPagination" th:if = "${totalPages > 1}" aria-label="Pagination">
+        <ul class="pagination justify-content-center">
 
-            <a href="#page">
-                <li>Voltar</li>
-            </a>
+            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:replace="fragments/paging :: paging(1, '<<', 'First Page')"></a>
+                <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
 
-            <a href="#page" class="active">
-                <li> 1</li>
-            </a>
+            </li>
 
-            <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
-                    <li th:unless="${currentPage != i}">[[${i}]]</li> &nbsp; &nbsp;
-            </a>
+            <div class="col-sm-1">
+                    <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+            </div>
 
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span> &nbsp; &nbsp;
+            </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span> &nbsp; &nbsp;
+            </div>
         </ul>
+    </div>
 </nav>
 
 

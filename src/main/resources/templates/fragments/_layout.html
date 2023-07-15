@@ -64,7 +64,15 @@
     $(document).ready(function () {
         $(".navbar-toggle").click(function () {
             $(".sidebar").toggleClass("sidebar-open");
-        })
+        });
+
+        // limpar o campo de pesquisa
+        $("#btnClear").on("click", function (e) {
+            e.preventDefault();
+            $("#keyword").text("");
+            window.location = "[[@{/v1/app/cpd/funcionarios/list}]]";
+        });
+
     });
 
 </script>

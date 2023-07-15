@@ -40,9 +40,11 @@
                     <input class="form-control" type="search" placeholder="Search" name="keyword" id="keyword" size="50"
                            th:value="${keyword}" required aria-label="Search">
                     <button class="btn btn-outline-success m-2" type="submit" value="pesquisar">Pesquisar</button>
-                    <button class="btn btn-outline-success m-2" type="submit" value="limpar" id="btnLimpar"
-                            onclick="limparPesquisa()">Limpar
+
+                    <button class="btn btn-outline-success m-2" type="submit" value="limpar" id="btnClear">
+                        Limpar
                     </button>
+
                 </form>
             </div>
         </nav>
@@ -93,40 +95,34 @@
                 </tbody>
             </table>
 
-<!--            <nav th:replace="~{fragments/_menuPagination :: menuPagination}"></nav>-->
+            <!--            <nav th:replace="~{fragments/_menuPagination :: menuPagination}"></nav>-->
 
-            <div th:if="${totalPages > 1}" class="page">
-                <div class="page-item-content">
-                    <span class="item-content">Total Rows: [[${totalPages}]]</span>
-                </div>
-
-                <div class="active page-item-content" th:each="i : ${#numbers.sequence(1, 1)}">
-                    <span th:unless="${currentPage != i}" class="item-content">[[${i}]]</span> &nbsp; &nbsp;
-                    <a th:if="${currentPage != i}"
-                    th:href="@{'/v1/app/cpd/funcionarios/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
-                </div>
-
-                <div class="page-item-content" th:each="i : ${#numbers.sequence(2, totalPages)}">
-                    <span th:unless="${currentPage != i}" class="item-content">[[${i}]]</span> &nbsp; &nbsp;
-                    <a th:if="${currentPage != i}"
-                       th:href="@{'/v1/app/cpd/funcionarios/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">[[${i}]]</a>
-                </div>
-
-
-
-                <div class="page-item-content">
-                    <a th:if="${currentPage < totalPages}"
-                       th:href="@{'/v1/app/cpd/funcionarios/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Next</a>
-                    <span th:unless="${currentPage < totalPages}" class="item-content">Next</span> &nbsp; &nbsp;
-                </div>
-
-                <div class="page-item-content">
-                    <a th:if="${currentPage < totalPages}"
-                       th:href="@{'/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Last</a>
-                    <span th:unless="${currentPage < totalPages}" class="item-content">Last</span> &nbsp; &nbsp;
-                </div>
-
-            </div><!--Menu pagination-->
+            <nav aria-label="Pagination" th:if="${totalPages > 0}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                        <a th:replace="fragments/paging :: paging(1, '<<', 'First Page')"></a>
+                    </li>
+                    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+                        <a th:replace="fragments/paging :: paging(${currentPage - 1}, 'Prev', 'Previous Page')"></a>
+                    </li>
+                    <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                    <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                        th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+                        <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
+                    </li>
+                    <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                        <a th:replace="fragments/paging :: paging(${currentPage + 1},'Next', 'Next Page')"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                        <a th:replace="fragments/paging :: paging(${totalPages}, '>>', 'Last Page')"></a>
+                    </li>
+                </ul>
+            </nav><!--Menu pagination-->
 
 
         </div>
