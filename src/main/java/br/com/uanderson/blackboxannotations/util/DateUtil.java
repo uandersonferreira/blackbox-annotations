@@ -18,6 +18,8 @@ public class DateUtil {
         return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(localDateTime);
     }
 
+
+
     public static void main(String[] args) {
         // data/hora atual
         LocalDateTime agora = LocalDateTime.now();
@@ -31,6 +33,7 @@ public class DateUtil {
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         String horaFormatada = formatterHora.format(agora);
         System.out.println(horaFormatada);
+
     }
 
 }

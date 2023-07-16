@@ -1,26 +1,19 @@
 package br.com.uanderson.blackboxannotations.controller;
 
-import br.com.uanderson.blackboxannotations.model.Funcionario;
-import br.com.uanderson.blackboxannotations.service.FuncionarioService;
 import br.com.uanderson.blackboxannotations.util.DateUtil;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.thymeleaf.ITemplateEngine;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.web.IWebExchange;
 
-import java.text.DateFormat;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.Temporal;
+import java.util.Calendar;
 
 @Controller
 @RequestMapping(path = {"/"})
@@ -43,15 +36,40 @@ public class HomeController {
     }
 
     @GetMapping(path = "/layout")
-    public String layout(Model model) {
-        //Para Usar: Data-Hora | Data | Time
-        model.addAttribute("myDateTime", dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        model.addAttribute("myDate", dateUtil.formatLocalDate(LocalDateTime.now()));
-        model.addAttribute("myTime", dateUtil.formatLocalTime(LocalDateTime.now()));
+    public String layout() {
         return "fragments/_layout";
     }
 
 
+    public void process(
+            final IWebExchange webExchange,
+            final ITemplateEngine templateEngine,
+            final Writer writer)
+            throws Exception {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        Calendar cal = Calendar.getInstance();
+
+        WebContext ctx = new WebContext(webExchange, webExchange.getLocale());
+        ctx.setVariable("today", dateFormat.format(cal.getTime()));
+
+        templateEngine.process("fragments/_layout", ctx, writer);
+
+    }
 
 
+
+//    public void process(
+//            final IWebExchange webExchange,
+//            final ITemplateEngine templateEngine,
+//            final Writer writer) {
+//
+//        //Para Usar: Data-Hora | Data | Time
+//        WebContext webContext = new WebContext(webExchange, webExchange.getLocale());
+//        webContext.setVariable("myDateTime", dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+//        webContext.setVariable("myDate", dateUtil.formatLocalDate(LocalDateTime.now()));
+//        webContext.setVariable("myTime", dateUtil.formatLocalTime(LocalDateTime.now()));
+//        templateEngine.process("fragments/_layout", webContext, writer);
+//
+//    }
 }//class

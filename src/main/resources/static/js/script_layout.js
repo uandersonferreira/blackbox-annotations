@@ -24,3 +24,18 @@ toggleSidebar.addEventListener("click", () => {
 logo.addEventListener("click", () => {
     sidebar.classList.toggle("close");
 });
+
+
+
+
+//-----------------------
+$(function () {
+    $('[data-toggle="popover"]').popover();
+});
+
+$(document).ready(function () {
+    $(".navbar-toggle").click(function () {
+        $(".sidebar").toggleClass("sidebar-open");
+    })
+
+});

@@ -2,27 +2,33 @@
 <html lang="pt-BR"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--<head th:replace="~{fragments/_head::head}">-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head</title>
+    <!--My Css -->
+    <link rel="stylesheet" href="/css/style_layout.css">
+    <link rel="stylesheet" href="/css/style_menuPagination.css">
+    <link rel="stylesheet" href="/css/style_form_funcionarios">
+    <!-- Box Icons  -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/js/bootstrap.min.js">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.css">
+    <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/js/all.js">
 
-<head th:replace="~{fragments/_head::head}"></head>
+</head>
 
 <body>
 <header th:replace="~{fragments/_header :: header}"></header>
 
 <!-- ============= Home Section =============== -->
 <section class="home">
-    <div class="toggle-sidebar">
-        <div class="menu-icon">
-            <i class='bx bx-menu'></i>
-            <div class="text">Menu</div>
-        </div>
-
-        <div class="date-time">
-            <span th:text="${myDate}"></span>
-            <span th:text="${myTime}"> </span>
-        </div>
-
-    </div>
-
+    <aside th:replace="~{fragments/_menuTop ::menuTop}"></aside>
+    <p>Today is: <span th:text="${today}">13 February 2011</span></p>
     <main class="layout-content" layout:fragment="corpo">
         <h1>
             This main content will be decorated by the actual page returned
@@ -33,47 +39,18 @@
 
 <footer th:replace="~{fragments/_footer :: footer}"></footer>
 
-<script th:src="@{/webjars/jquery-mask-plugin/1.14.16/dist/jquery.mask.js}"></script>
-<script th:src="@{/webjars/popper.js/2.9.3/umd/popper.js}"></script>
+
+<!-- My - JS -->
+<script src="/js/script_layout.js"></script>
+<script src="/js/date_time.js"></script>
+<!-- jquery - JS -->
+<script src="/webjars/jquery/3.6.4/jquery.js"></script>
+<script src="/webjars/jquery-mask-plugin/1.14.16/dist/jquery.mask.js"></script>
+<script src="/webjars/popper.js/2.9.3/umd/popper.js"></script>
 
 <script>
-    const listItems = document.querySelectorAll(".sidebar-list li");
-
-    listItems.forEach((item) => {
-        item.addEventListener("click", () => {
-            let isActive = item.classList.contains("active");
-
-            listItems.forEach((el) => {
-                el.classList.remove("active");
-            });
-
-            if (isActive) item.classList.remove("active");
-            else item.classList.add("active");
-        });
-    });
-
-    const toggleSidebar = document.querySelector(".toggle-sidebar");
-    const logo = document.querySelector(".logo-box");
-    const sidebar = document.querySelector(".sidebar");
-
-    toggleSidebar.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
-    });
-
-    logo.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
-    });
-
-    //-----------------------
-    $(function () {
-        $('[data-toggle="popover"]').popover();
-    });
 
     $(document).ready(function () {
-        $(".navbar-toggle").click(function () {
-            $(".sidebar").toggleClass("sidebar-open");
-        });
-
         // limpar o campo de pesquisa
         $("#btnClear").on("click", function (e) {
             e.preventDefault();

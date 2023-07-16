@@ -231,7 +231,7 @@ main table{
 
     border: 1px solid var(--color_Blue);
 }
-.home .toggle-sidebar .date-time span{
+.home .toggle-sidebar .date-time div{
     padding: 10px;
 }
 

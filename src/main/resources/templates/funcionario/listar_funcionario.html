@@ -95,30 +95,29 @@
                 </tbody>
             </table>
 
-<!--            <nav th:replace="~{fragments/_menuPagination :: menuPagination}"></nav>-->
             <nav aria-label="Pagination" th:if="${totalPages > 0}">
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-                        <a th:replace="fragments/paging :: paging(1, '<<', 'Primeira Página')"></a>
+                        <a th:replace="~{fragments/_paging :: paging(1, '<<', 'Primeira Página')}"></a>
                     </li>
                     <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
-                        <a th:replace="fragments/paging :: paging(${currentPage - 1}, 'Voltar', 'Voltar Página')"></a>
+                        <a th:replace="~{fragments/_paging :: paging(${currentPage - 1}, 'Voltar', 'Voltar Página')}"></a>
                     </li>
                     <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
                         <a class="page-link" href="#">...</a>
                     </li>
                     <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
                         th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
-                        <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Página ' + ${page})"></a>
+                        <a th:replace="~{fragments/_paging :: paging(${page}, ${page}, 'Página ' + ${page})}"></a>
                     </li>
                     <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
                         <a class="page-link" href="#">...</a>
                     </li>
                     <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
-                        <a th:replace="fragments/paging :: paging(${currentPage + 1},'Proximo', 'Proxima Página')"></a>
+                        <a th:replace="~{fragments/_paging :: paging(${currentPage + 1},'Proximo', 'Proxima Página')}"></a>
                     </li>
                     <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-                        <a th:replace="fragments/paging :: paging(${totalPages}, '>>', 'Última Página')"></a>
+                        <a th:replace="~{fragments/_paging :: paging(${totalPages}, '>>', 'Última Página')}"></a>
                     </li>
                 </ul>
             </nav><!--Menu pagination-->
