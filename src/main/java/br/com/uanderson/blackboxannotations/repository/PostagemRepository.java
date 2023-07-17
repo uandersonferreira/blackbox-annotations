@@ -10,5 +10,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
-
+    @Query("""
+            SELECT p FROM Postagem p
+                WHERE p.titulo LIKE %?1%
+                    OR CONCAT(p.dataCriacao, '') LIKE %?1%
+            """)
+    Page<Postagem> findAll(String keyword, Pageable pageable);
 }

@@ -22,11 +22,11 @@ public class FuncionarioController {
     @GetMapping(path = "/list")
     public String listAllPageable(Model model) {
         String keyword = "";
-        return findPaginated(1, "nome", "asc", keyword, model);
+        return mostrarBuscaPaginada(1, "nome", "asc", keyword, model);
     }
 
-    @GetMapping(path = "/cadastro")
-    public ModelAndView cadastro(Funcionario funcionario) {
+    @GetMapping(path = "/form")
+    public ModelAndView mostrarPaginaDeCadastro(Funcionario funcionario) {
         ModelAndView modelAndView = new ModelAndView("funcionario/cadastro");
         modelAndView.addObject("funcionario", funcionario);
         return modelAndView;
@@ -35,20 +35,20 @@ public class FuncionarioController {
     @PostMapping(path = "/save")
     public ModelAndView save(Funcionario funcionario, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return cadastro(funcionario);//Retorna o funcionario para a page de cadrastro, preservando os dados do objeto/Funcionario
+            return mostrarPaginaDeCadastro(funcionario);//Retorna o funcionario para a page de cadrastro, preservando os dados do objeto/Funcionario
             //que tentou realizar a ação.
         }
 
 //        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
         funcionarioService.save(funcionario);//Se não tiver erro, irá salvar o Funcionário
-        return cadastro(new Funcionario());//É retornar a page de cadastro com um novo funcionário vazio;
+        return mostrarPaginaDeCadastro(new Funcionario());//É retornar a page de mostrarPaginaDeCadastro com um novo funcionário vazio;
     }
 
 
     @GetMapping(path = "/editar/{id}")
     public ModelAndView findByIdAndUpdate(@PathVariable Long id) {
         Funcionario funcionario = funcionarioService.findByIdOrThrowBadRequestException(id);
-        return cadastro(funcionario);
+        return mostrarPaginaDeCadastro(funcionario);
     }
 
     @GetMapping(path = "/delete/{id}")
@@ -59,14 +59,14 @@ public class FuncionarioController {
 
     @PostMapping("/update")
     public ModelAndView update(Funcionario funcionario, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return cadastro(funcionario);
+        if (bindingResult.hasErrors()) return mostrarPaginaDeCadastro(funcionario);
 
         funcionarioService.update(funcionario);
         return new ModelAndView("redirect:/v1/app/cpd/funcionarios/list");
     }
 
     @GetMapping(path = "/page/{pageNow}")
-    public String findPaginated(@PathVariable(value = "pageNow") int pageNow,
+    public String mostrarBuscaPaginada(@PathVariable(value = "pageNow") int pageNow,
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,
                                 @RequestParam("keyword") String keyword,

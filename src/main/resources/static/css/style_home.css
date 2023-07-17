@@ -60,7 +60,7 @@ p {
     justify-content: center;
 }
 
-.btn {
+.btn-destaque {
     font-size: 1em;
     color: #fff;
     background: var(--active-color);
@@ -253,18 +253,24 @@ header.sticky .navigation li a:hover {
         width: 40px;
         height: 40px;
         /*background-imagens: url(../imagens/menu-hamburger.png);*/
+        background-image: url(../imagens/menu-hamburguer.png);
+
         background-size: 30px;
         background-repeat: no-repeat;
         background-position: center;
         cursor: pointer;
+        color: #fff
     }
 
     .menuToggle.active {
-        /*background-imagens: url(../imagens/menu-close.png);*/
+        /*background-imagens: url(../imagens/menu-menu-close.png);*/
+        background-image: url(../imagens/menu-close.png);
+
         background-size: 25px;
         background-repeat: no-repeat;
         background-position: center;
         cursor: pointer;
+
     }
 
     header.sticky .menuToggle {
@@ -277,7 +283,7 @@ header.sticky .navigation li a:hover {
 
     .banner .content h2 {
         font-size: 3em;
-        color: #000;
+        color: #fff;
         font-weight: bold;
     }
 

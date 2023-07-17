@@ -43,16 +43,14 @@
 <!-- ============= Home Section =============== -->
 <section class="home">
     <aside th:replace="~{fragments/_menuTop ::menuTop}"></aside>
-    <main class="layout-content" layout:fragment="corpo">
+    <main class="layout-content " layout:fragment="corpo">
         <h1>
             This main content will be decorated by the actual page returned
             in the controller methods.
         </h1>
     </main>
-
-    <footer th:replace="~{fragments/_footer :: footer}"></footer>
 </section>
-
+<footer th:replace="~{fragments/_footer :: footer}"></footer>
 
 
 

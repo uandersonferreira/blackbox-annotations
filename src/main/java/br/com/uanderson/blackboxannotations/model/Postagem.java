@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,9 +19,14 @@ public class Postagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition="VARCHAR(128)")
     private String titulo;
+    @Lob
+    @Column(columnDefinition = "BLOB")
     private String conteudo;
     private String imagem;
+    private LocalDateTime dataCriacao;//= LocalDateTime.now()
+    private LocalDateTime dataAtualizacao;
 
 
 }//class

@@ -41,7 +41,7 @@
             <div class="submenu">
 <!--                <a th:href="@{/v1/app/cpd/funcionarios/list}" class="link submenu-title">Funcionários</a>-->
                 <a th:href="@{/v1/app/cpd/funcionarios/list}" class="link">Listar todos</a>
-                <a th:href="@{/v1/app/cpd/funcionarios/cadastro}" class="link">Criar novo</a>
+                <a th:href="@{/v1/app/cpd/funcionarios/form}" class="link">Criar novo</a>
             </div>
         </li>
 
@@ -72,8 +72,8 @@
             </div>
             <div class="submenu">
                 <a href="#" class="link submenu-title">Anotações</a>
-                <a href="#" class="link">Listar Anotações</a>
-                <a href="#" class="link">Criar nova</a>
+                <a th:href="@{/v1/app/cpd/postagens/list}" class="link">Listar Anotações</a>
+                <a th:href="@{/v1/app/cpd/postagens/form}" class="link">Criar nova</a>
             </div>
         </li>
 
