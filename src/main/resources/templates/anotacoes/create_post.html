@@ -1,0 +1,47 @@
+<!Doctype html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/_layout.html}"><!--Informa a localização do fragment layout -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Editor de Texto</title>
+</head>
+
+<body>
+<div  class="container layout-content" layout:fragment="corpo">
+    <!--Bootstrap classes arrange web page components into columns and rows in a grid -->
+    <div class="row mt-5">
+        <div class="col">
+            <form action="/v1/app/cpd/post/cadastro" method="post" th:object="${postagem}" enctype="multipart/form-data">
+                <div class="form-group mb-2">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" placeholder="Title" autocomplete="off" class="form-control"
+                           th:field="*{titulo}"/>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="dummy-header">
+                        TinyMCE Fabric Skin
+                    </div>
+                    <div class="my-custom-editor-container">
+                        <textarea type="text" rows="4" id="editor" class="form-control"
+                                  th:field="*{titulo}" autocomplete="off">
+                    </textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-6 m-3">
+                    <label for="arquivo" class="lblCliente">Carregar Imagem:</label>
+                    <input type="file" class="form-control" name="file" id="arquivo" placeholder="escolher uma imagem" multiple>
+                </div>
+
+                <button type="submit" class="btn btn-primary m-3">Enviar</button>
+            </form>
+        </div><!-- col -->
+    </div><!-- row -->
+</div>
+
+</body>
+</html>

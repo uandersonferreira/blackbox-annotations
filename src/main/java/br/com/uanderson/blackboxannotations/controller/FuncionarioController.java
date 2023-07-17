@@ -1,16 +1,11 @@
 package br.com.uanderson.blackboxannotations.controller;
 
-import br.com.uanderson.blackboxannotations.dto.FuncionarioPutRequestBody;
 import br.com.uanderson.blackboxannotations.model.Funcionario;
 import br.com.uanderson.blackboxannotations.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

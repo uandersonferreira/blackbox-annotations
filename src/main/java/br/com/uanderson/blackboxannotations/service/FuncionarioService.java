@@ -1,12 +1,8 @@
 package br.com.uanderson.blackboxannotations.service;
 
-import br.com.uanderson.blackboxannotations.dto.FuncionarioPostRequestBody;
-import br.com.uanderson.blackboxannotations.dto.FuncionarioPutRequestBody;
 import br.com.uanderson.blackboxannotations.model.Funcionario;
 import br.com.uanderson.blackboxannotations.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
