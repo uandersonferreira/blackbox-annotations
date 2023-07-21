@@ -44,9 +44,7 @@
     color: var(--color_Light1);
     transition: all .5s ease;
 }
-.logo-box:hover{
-    color: var(--color_Blue);
-}
+
 .logo-box i{
     font-size: 30px;
     height: 50px;
@@ -55,9 +53,9 @@
     line-height: 50px;
     transition: all .5s ease;
 }
-.sidebar.close .logo-box i{
-    transform: rotate(360deg);
-}
+/*.sidebar.close .logo-box i{*/
+/*    transform: rotate(360deg);*/
+/*}*/
 .logo-name{
     font-size: 22px;
     font-weight: 600;

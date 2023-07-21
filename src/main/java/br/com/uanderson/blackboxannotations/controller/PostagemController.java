@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +21,6 @@ import java.util.UUID;
 @RequestMapping(path = "/v1/app/cpd/postagens")
 @RequiredArgsConstructor
 public class PostagemController {
-    //    private final PostagemRepository postagemRepository;
     private final PostagemService postagemService;
 
     @GetMapping(path = "/form")
@@ -71,6 +71,7 @@ public class PostagemController {
         Page<Postagem> page = postagemService.findAllPaginated(pageNow, pageSize, sortField, sortDir, keyword);
         List<Postagem> postagens = page.getContent();
 
+
         model.addAttribute("currentPage", pageNow);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
@@ -83,6 +84,7 @@ public class PostagemController {
         model.addAttribute("postagens", postagens);
 
         return "anotacoes/listar_anotacoes";
+//        return "anotacoes/teste";
     }
 
     @GetMapping(path = "/editar/{id}")

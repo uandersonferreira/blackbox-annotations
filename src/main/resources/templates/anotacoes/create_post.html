@@ -34,8 +34,16 @@
     <div class="container m-5" id="cadastro">
     <div class="row mt-5">
         <div class="col">
-            <form action="/v1/app/cpd/postagens/save" method="post" th:object="${postagem}" enctype="multipart/form-data">
+            <form th:action="${postagem.id == null ? '/v1/app/cpd/postagens/save' : '/v1/app/cpd/postagens/update' }"
+                  method="post"
+                  th:object="${postagem}"
+                  enctype="multipart/form-data">
                 <div>
+                    <input type="hidden" readonly="readonly" id="id" name="id" th:field="*{id}" />
+                    <!--Verifica se o id é nulo ou se já contém algo o próprio framework(thymeleaf) que faz
+                    a distinção, para poder saber se é para alterar ou criar.
+                    -->
+
                     <div class="form-group mb-2">
                         <label for="title">Title:</label>
                         <input type="text" id="title" placeholder="Title" autocomplete="off" class="form-control"
