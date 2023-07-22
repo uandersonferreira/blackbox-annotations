@@ -7,13 +7,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
+
 @Component
 public class UploadUtil {
 
-    public static boolean fazerUploadImagem(MultipartFile imagem){
+    public static boolean fazerUploadImagem(MultipartFile imagem, UUID uuid){
         Path diretorioRaiz = Paths.get("src");
         Path subDiretorios = Paths.get("src/main/resources/static/imagens/img-uploads");
-        String nomeArquivo = imagem.getOriginalFilename();
+        String nomeArquivo = uuid + imagem.getOriginalFilename();
         boolean sucessoUpload = false;
 
         if (!imagem.isEmpty()) {

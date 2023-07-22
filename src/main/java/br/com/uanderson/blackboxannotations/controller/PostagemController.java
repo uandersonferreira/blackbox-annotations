@@ -4,6 +4,7 @@ import br.com.uanderson.blackboxannotations.model.Postagem;
 import br.com.uanderson.blackboxannotations.service.PostagemService;
 import br.com.uanderson.blackboxannotations.util.UploadUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,9 @@ import java.util.UUID;
 @Controller
 @RequestMapping(path = "/v1/app/cpd/postagens")
 @RequiredArgsConstructor
+@Log4j2
 public class PostagemController {
+    //    private final PostagemRepository postagemRepository;
     private final PostagemService postagemService;
 
     @GetMapping(path = "/form")
@@ -32,24 +35,25 @@ public class PostagemController {
     @PostMapping(path = "/save",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView cadastroDeClient(@ModelAttribute Postagem postagem,
-                                         @RequestParam("file") MultipartFile imagem,
-                                         BindingResult bindingResult) {
-        ModelAndView mv = new ModelAndView("anotacoes/create_post");
+    public ModelAndView cadastroDeClient(@ModelAttribute Postagem postagem, @RequestParam("file") MultipartFile imagem){
+        ModelAndView mv =  new ModelAndView("anotacoes/create_post");
 
-        if (bindingResult.hasErrors()) {
-            mv.addObject("msgErro", bindingResult.getFieldErrors());
-            return mostrarPaginaDeCadastro(postagem);
-        }
         mv.addObject("postagem", postagem);
+        UUID uuid = UUID.randomUUID();
+        try {
+            if (UploadUtil.fazerUploadImagem(imagem, uuid)) {
+                postagem.setImagem( uuid + imagem.getOriginalFilename());
+            }
 
-        if (UploadUtil.fazerUploadImagem(imagem)) {
-            postagem.setImagem(UUID.randomUUID().toString() + imagem.getOriginalFilename());
+            postagemService.save(postagem);
+           log.info("Salvo com sucesso: '{}' ", postagem.getTitulo() + " " + postagem.getImagem());
+
+            return mostrarPaginaDeCadastro(new Postagem());
+        } catch (Exception e) {
+            mv.addObject("msgErro", e.getMessage());
+            log.info("Erro ao salvar '{}'",  e.getMessage());
+            return mv;
         }
-
-        postagemService.save(postagem);
-        System.out.println("Salvo com sucesso: " + postagem.getTitulo() + " " + postagem.getImagem());
-        return mostrarPaginaDeCadastro(new Postagem());
     }
 
     @GetMapping(path = "/list")
@@ -69,7 +73,6 @@ public class PostagemController {
         Page<Postagem> page = postagemService.findAllPaginated(pageNow, pageSize, sortField, sortDir, keyword);
         List<Postagem> postagens = page.getContent();
 
-
         model.addAttribute("currentPage", pageNow);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
@@ -82,7 +85,6 @@ public class PostagemController {
         model.addAttribute("postagens", postagens);
 
         return "anotacoes/listar_anotacoes";
-//        return "anotacoes/teste";
     }
 
     @GetMapping(path = "/editar/{id}")
