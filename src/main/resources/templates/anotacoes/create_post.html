@@ -37,7 +37,9 @@
             <form th:action="${postagem.id == null ? '/v1/app/cpd/postagens/save' : '/v1/app/cpd/postagens/update' }"
                   method="post"
                   th:object="${postagem}"
-                  enctype="multipart/form-data">
+                  enctype="multipart/form-data"
+                  id="get-data-form">
+
                 <div>
                     <input type="hidden" readonly="readonly" id="id" name="id" th:field="*{id}" />
                     <!--Verifica se o id é nulo ou se já contém algo o próprio framework(thymeleaf) que faz
@@ -67,8 +69,8 @@
 
                     <button type="submit" class="btn btn-primary m-3">Enviar</button>
                 </div>
-
             </form>
+
         </div><!-- col -->
     </div><!-- row -->
     </div>

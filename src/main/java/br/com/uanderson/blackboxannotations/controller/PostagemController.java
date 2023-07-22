@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,25 +32,24 @@ public class PostagemController {
     @PostMapping(path = "/save",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView cadastroDeClient(@ModelAttribute Postagem postagem, @RequestParam("file") MultipartFile imagem){
-        ModelAndView mv =  new ModelAndView("anotacoes/create_post");
+    public ModelAndView cadastroDeClient(@ModelAttribute Postagem postagem,
+                                         @RequestParam("file") MultipartFile imagem,
+                                         BindingResult bindingResult) {
+        ModelAndView mv = new ModelAndView("anotacoes/create_post");
 
+        if (bindingResult.hasErrors()) {
+            mv.addObject("msgErro", bindingResult.getFieldErrors());
+            return mostrarPaginaDeCadastro(postagem);
+        }
         mv.addObject("postagem", postagem);
 
-        try {
-            if (UploadUtil.fazerUploadImagem(imagem)) {
-                postagem.setImagem(UUID.randomUUID().toString()+imagem.getOriginalFilename());
-            }
-
-            postagemService.save(postagem);
-            System.out.println("Salvo com sucesso: " + postagem.getTitulo() + " " + postagem.getImagem());
-
-            return mostrarPaginaDeCadastro(new Postagem());
-        } catch (Exception e) {
-            mv.addObject("msgErro", e.getMessage());
-            System.out.println("Erro ao salvar " + e.getMessage());
-            return mv;
+        if (UploadUtil.fazerUploadImagem(imagem)) {
+            postagem.setImagem(UUID.randomUUID().toString() + imagem.getOriginalFilename());
         }
+
+        postagemService.save(postagem);
+        System.out.println("Salvo com sucesso: " + postagem.getTitulo() + " " + postagem.getImagem());
+        return mostrarPaginaDeCadastro(new Postagem());
     }
 
     @GetMapping(path = "/list")
