@@ -43,6 +43,8 @@
     align-items: center;
     color: var(--color_Light1);
     transition: all .5s ease;
+    justify-content: center;
+
 }
 
 .logo-box i{
@@ -218,9 +220,9 @@ main table{
     background-color: var(--color_Light1);
     width: 100% ;
 
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
+    /*position: fixed;*/
 
 }
 .home .toggle-sidebar .menu-icon{

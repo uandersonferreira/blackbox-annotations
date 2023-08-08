@@ -9,7 +9,7 @@ const relogio = setInterval(function time(){
     let segundoAtual = dateToday.getSeconds();
 
     let diaAtual = dateToday.getDate();
-    let mesAtual = dateToday.getMonth();
+    let mesAtual = dateToday.getMonth() + 1;
     let anoAtual = dateToday.getFullYear();
 
     if(horaAtual < 10) horaAtual = '0' + horaAtual;
@@ -26,3 +26,9 @@ const relogio = setInterval(function time(){
     hora.textContent = horaFormatada;
 
 });
+/*
+O método getMonth() retorna o mês da data especificada. É importante observar
+a respeito do método getMonth() que ele retorna valores indexados em zero
+(ou seja, de 0 a 11), onde 0 representa janeiro e 11 representa dezembro.
+Por isso, é preciso adicionar 1 para "normalizar" o valor do mês.
+ */

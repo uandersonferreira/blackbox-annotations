@@ -1,0 +1,544 @@
+*{
+	padding: 0;
+	margin:2px;
+}
+body{
+	height:100%;
+	margin:auto;
+}
+
+#container{
+	width:840px;
+	margin:0 auto;
+	height:100%;
+	/*background:#ECECEC;*/
+	/*border:1px solid #000*/
+}
+
+#cabecalho{
+	width:840px;
+	height:15%;
+	/*background:#ECECEC;*/
+	/*border:3px solid #FFFFFF;*/
+
+}
+		#img{
+			width:828px;
+			height:72px; 
+			margin-left:0px; 
+		}
+		#data_filial_operador{
+			width:828px;
+			height:35px; 
+		}
+				#data1{
+					width:230px;
+					height:35px; 
+					float: left;
+					font-family: verdana;
+					font-size: 12pt;
+				}
+				#filial{
+					width:200px;
+					height:35px; 
+					font-size: 15pt;
+					position:0px;
+					float: left;
+					font-family: verdana;
+					text-align: center;
+
+				}
+				#operador{
+					width:365px;
+					height:35px; 
+					font-family: verdana;
+					float: left;
+					margin-left:12px;
+					text-align: right;
+				}
+
+
+#corpo{
+
+	width:840px;
+	height:940px;
+	/*background:#ECECEC;*/
+	/*border:3px solid red;*/
+
+}
+		#linha1{
+			/*background:#ECECEC;*/
+			width:836px;
+			height:12%;
+		}
+				#box1{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 10pt;
+					text-align: center;
+				}
+				#box2{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 10pt;
+					text-align: center;
+				}
+				#box3{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+				#box4{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+
+		#linha2{
+			width:836px;
+			height:11%;
+			/*background:#ECECEC;*/
+			
+		}
+				#box5{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 10pt;
+					text-align: center;
+				}
+				#box6{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					
+					
+					#bloq{
+						height:70%;
+						text-align: justify-all;
+						width:194px;
+						float: left;
+						font-family: verdana;
+						font-size: 7pt;
+					}
+					#derrubar{
+						height:25%;
+						text-align: center;
+						width:200px;
+						float: left;
+						font-family: verdana;
+						font-size: 10pt;
+					}
+				}
+				#box7{
+					width:200px;
+					height:95%;
+					float: left;
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 10pt;
+					text-align: center;
+					
+				}
+
+					
+
+				#box8{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+
+		#linha3{
+			/*background:#ECECEC;*/
+			width:836px;
+			height:19%;
+		}
+				#box9{
+					width:130px;
+					height:98%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#boxCad{
+					width:130px;
+					height:98%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#box10{
+					width:120px;
+					height:98%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+				#box11{
+					width:208px;
+					height:98%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: left;
+					padding-left: 4px;
+					
+				}
+				#box12{
+					width:200px;
+					height:98%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 9pt;
+					text-align: center;
+					padding-left: 1px;
+				}
+
+		#linha4{
+			/*background:#ECECEC;*/
+			width:836px;
+			height:12%;
+		}
+				#box13{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+				#box14{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+				#box15{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+				#box16{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+
+		#linhaUnificacao{
+			width:836px;
+			height:16%;
+		}
+				#boxUnificacao1{
+					width:130px;
+					height:100%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#boxUnificacao2{
+					width:125px;
+					height:100%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#boxUnificacao3{
+					width:146px;
+					height:100%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#boxUnificacao4{
+					width:121px;
+					height:100%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#boxUnificacao5{
+					width:130px;
+					height:100%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#boxUnificacao6{
+					width:136px;
+					height:100%;
+					float: left;
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+
+		#linha5{
+			/*background:#ECECEC;*/
+			width:836px;
+			height:12%;
+		}
+				#box17{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+				#box18{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 9pt;
+					text-align: center;
+				}
+				#box19{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 9pt;
+					text-align: center;
+				}
+				#box20{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 6pt;
+					text-align: center;
+				}
+
+		#linha6{
+			/*background:#ECECEC;*/
+			width:836px;
+			height:14%;
+		}
+				#box21{
+					width:200px;
+					height:105%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+				#box22{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#box23{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#box24{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 7pt;
+					text-align: center;
+				}
+
+		#linha7{
+			/*background:#ECECEC;*/
+			width:836px;
+			height:11%;
+		}
+				#box25{
+					width:200px;
+					height:95%;
+					float: left;
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 10pt;
+					
+				}
+
+					#bloq_2{
+						height:60%;
+						text-align: justify-all;
+						width:194px;
+						float: left;
+						font-family: verdana;
+						font-size: 9pt;
+					}
+					#derrubar_2{
+						height:30%;
+						text-align: center;
+						width:200px;
+						float: left;
+						font-family: verdana;
+						font-size: 10pt;
+					}
+				#box26{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+
+				}
+				#box27{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 8pt;
+					text-align: center;
+				}
+				#box28{
+					width:200px;
+					height:95%;
+					float: left;
+					/*background:red;*/
+					/*background:red;*/
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 9pt;
+					text-align: center;
+				}
+
+	#rodape{
+		float: left;
+		width:840px;
+		height:70px;
+		/*border:3px solid #000;*/
+		font-family: verdana;
+		font-size: 9pt;
+		text-align: center;
+	}
+			#ass_colaborador{
+					float: left;
+					width:614px;
+					height:70px;
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 9pt;
+					text-align: center;
+			}
+			#imprimir{
+	        		float: left;
+					width:200px;
+					height:70px;
+					border:1px solid #000;
+					font-family: verdana;
+					font-size: 9pt;
+					text-align: center;
+			}

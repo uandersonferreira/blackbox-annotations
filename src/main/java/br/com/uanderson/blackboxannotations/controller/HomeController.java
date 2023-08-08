@@ -2,6 +2,7 @@ package br.com.uanderson.blackboxannotations.controller;
 
 import br.com.uanderson.blackboxannotations.util.DateUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 @Controller
 @RequestMapping(path = {"/"})
 @RequiredArgsConstructor
+@Log4j2
 public class HomeController {
 
     private final DateUtil dateUtil;
@@ -41,35 +43,20 @@ public class HomeController {
     }
 
 
-    public void process(
-            final IWebExchange webExchange,
-            final ITemplateEngine templateEngine,
-            final Writer writer)
-            throws Exception {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
-        Calendar cal = Calendar.getInstance();
-
-        WebContext ctx = new WebContext(webExchange, webExchange.getLocale());
-        ctx.setVariable("today", dateFormat.format(cal.getTime()));
-
-        templateEngine.process("fragments/_layout", ctx, writer);
-
-    }
-
-
-
 //    public void process(
 //            final IWebExchange webExchange,
 //            final ITemplateEngine templateEngine,
-//            final Writer writer) {
+//            final Writer writer)
+//            throws Exception {
 //
-//        //Para Usar: Data-Hora | Data | Time
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+//        Calendar cal = Calendar.getInstance();
+//
 //        WebContext webContext = new WebContext(webExchange, webExchange.getLocale());
-//        webContext.setVariable("myDateTime", dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-//        webContext.setVariable("myDate", dateUtil.formatLocalDate(LocalDateTime.now()));
-//        webContext.setVariable("myTime", dateUtil.formatLocalTime(LocalDateTime.now()));
-//        templateEngine.process("fragments/_layout", webContext, writer);
+//        webContext.setVariable("today", dateFormat.format(cal.getTime()));
+//
+//        templateEngine.process("fragments/_menuTop", webContext, writer);
 //
 //    }
+
 }//class

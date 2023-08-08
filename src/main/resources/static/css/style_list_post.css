@@ -75,6 +75,18 @@
     align-items: end;
     padding: 5px;
 }
+.collapse .info-post .data-right{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+
+    margin: 4px;
+    padding: 0px;
+
+    align-content: end;
+    justify-content: end;
+    text-align: end;
+}
 
 .collapse .data span{
     padding-left: 4px;
