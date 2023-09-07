@@ -1,0 +1,93 @@
+.flex-center{
+    align-items: center;
+}
+
+.circle-icon{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #2b4eff;
+    border: 5px solid #b2bfff;
+    color: #fff;
+
+    /* margin-left: -20px; */
+    margin-right: 15px;
+
+    transform: scale(1.2);
+}
+
+.accordion-item{
+    border: 0px !important;
+}
+
+.accordion-button:not(.collapsed){
+    border: 0px !important;
+    color: #0c63e4;
+    background: #fff;
+    /*box-shadow: 0 px 25px 3px gray(0, 0.1);*/
+}
+
+.accordion-body{
+    margin-top: 15px;
+    padding: 25px;
+    background: #fff;
+    border-radius: 5px;
+    /*box-shadow: 0 px 25px -3px rgba(0, 0, 0, 0.1);*/
+
+}
+
+.post-container{
+    padding: 5px;
+
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.card-header a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.card-header ul{
+    display: flex;
+}
+
+.card-header ul li{
+    padding: 10px;
+}
+
+.info-post{
+    display: flex;
+    justify-content: space-between;
+}
+.collapse .data{
+    display: flex;
+    text-align: end;
+    justify-content: end;
+    align-items: end;
+    padding: 5px;
+}
+.collapse .info-post .data-right{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+
+    margin: 4px;
+    padding: 0px;
+
+    align-content: end;
+    justify-content: end;
+    text-align: end;
+}
+
+.collapse .data span{
+    padding-left: 4px;
+}

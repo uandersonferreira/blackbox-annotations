@@ -1,0 +1,126 @@
+<!Doctype html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header class="sidebar close" th:fragment="header">
+    <!-- ========== Logo ============  -->
+    <a th:href="@{/layout}" class="logo-box">
+        <span> < > </span>
+        <span class="logo-name">Blackbox</span>
+    </a>
+
+    <!-- ========== List ============  -->
+    <ul class="sidebar-list">
+        <!-- -------- Non Dropdown List Item ------- -->
+        <li>
+            <div class="title">
+                <a class="link">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="name">Dashboard</span>
+                </a>
+                <!-- <i class='bx bxs-chevron-down'></i> -->
+            </div>
+            <div class="submenu">
+                <a th:href="@{/layout}" class="link submenu-title">Dashboard</a>
+                <!-- submenu links here  -->
+            </div>
+        </li>
+
+        <!-- -------- Dropdown List Item ------- -->
+        <li class="dropdown">
+            <div class="title">
+                <a class="link">
+                    <i class='bx bx-user'></i>
+                    <span class="name">Funcionários</span>
+                </a>
+                <i class='bx bxs-chevron-down'></i>
+            </div>
+            <div class="submenu">
+<!--                <a th:href="@{/v1/app/cpd/funcionarios/list}" class="link submenu-title">Funcionários</a>-->
+                <a th:href="@{/v1/app/cpd/funcionarios/list}" class="link">Listar todos</a>
+                <a th:href="@{/v1/app/cpd/funcionarios/form}" class="link">Criar novo</a>
+            </div>
+        </li>
+
+        <!-- -------- Dropdown List Coletores ------- -->
+<!--        <li class="dropdown">
+            <div class="title">
+                <a href="#" class="link">
+                    <i class='bx bx-mobile'></i>
+                    <span class="name">Coletores</span>
+                </a>
+                <i class='bx bxs-chevron-down'></i>
+            </div>
+            <div class="submenu">
+                <a href="#" class="link submenu-title">Coletores</a>
+                <a href="#" class="link">Listar Coletores</a>
+                <a href="#" class="link">Cadastrar novo</a>
+            </div>
+        </li>-->
+
+        <!-- -------- Dropdown List Item ------- -->
+        <li class="dropdown">
+            <div class="title">
+                <a href="#" class="link">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="name">Anotações</span>
+                </a>
+                <i class='bx bxs-chevron-down'></i>
+            </div>
+            <div class="submenu">
+                <a href="#" class="link submenu-title">Anotações</a>
+                <a th:href="@{/v1/app/cpd/postagens/list}" class="link">Listar Anotações</a>
+                <a th:href="@{/v1/app/cpd/postagens/form}" class="link">Criar nova</a>
+            </div>
+        </li>
+
+        <!-- -------- Dropdown List Rotinas ------- -->
+<!--        <li class="dropdown">-->
+<!--            <div class="title">-->
+<!--                <a href="#" class="link">-->
+<!--                    <i class='bx bx-file'></i>-->
+<!--                    <span class="name">Rotinas</span>-->
+<!--                </a>-->
+<!--                <i class='bx bxs-chevron-down'></i>-->
+<!--            </div>-->
+<!--            <div class="submenu">-->
+<!--                <a href="#" class="link submenu-title">Rotinas</a>-->
+<!--                <a th:href="@{/rotina}" class="link">Listar rotinas</a>-->
+<!--                <a href="#" class="link">Criar nova</a>-->
+<!--            </div>-->
+<!--        </li>-->
+
+        <!-- -------- Non Dropdown settings ------- -->
+        <li>
+            <div class="title">
+                <a href="#" class="link">
+                    <i class='bx bx-cog'></i>
+                    <span class="name">Configurações</span>
+                </a>
+                <!-- <i class='bx bxs-chevron-down'></i> -->
+            </div>
+            <div class="submenu">
+                <a href="#" class="link submenu-title">Configurações</a>
+                <!-- submenu links here  -->
+            </div>
+        </li>
+
+        <!-- -------- Dropdown exit ------- -->
+        <li>
+            <div class="title">
+                <a href="#" class="link">
+                    <i class='bx bx-exit'></i>
+                    <span class="name">Sair</span>
+                </a>
+                <!-- <i class='bx bxs-chevron-down'></i> -->
+            </div>
+            <div class="submenu">
+                <a href="#" class="link submenu-title">sair</a>
+                <!-- submenu links here  -->
+            </div>
+        </li>
+    </ul>
+</header>
+</body>
+</html>

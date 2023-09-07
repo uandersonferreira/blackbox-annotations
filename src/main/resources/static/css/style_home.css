@@ -1,0 +1,352 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Poppins:wght@100;200;300;700;900&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --main-color: #040714;
+    --site-color: #fff;
+    --active-color: #0063e5;
+    --active-color-2: #032c77;
+    --first-color: #08132f;
+    --second-color: #090b13;
+    --third-color: #1b202a;
+}
+
+p {
+    font-weight: 300;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../imagens/banner-home.jpg);
+    /*Usa a imagem como papel de parede do fundo*/
+    background-size: cover;
+}
+
+.banner .content {
+    max-width: 900px;
+    text-align: center;
+}
+
+.banner .content h2 {
+    font-size: 5em;
+    color: #fff;
+    font-weight: bold;
+}
+
+.banner .content p {
+    font-size: 1em;
+    color: #fff;
+}
+
+.fa-solid{
+    color: #ffffff;
+}
+
+.group-btn{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.btn-destaque {
+    font-size: 1em;
+    color: #fff;
+    background: var(--active-color);
+    display: inline-block;
+    padding: 10px 30px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: 0.5s;
+
+}
+
+.btn:hover {
+    letter: spacing 6px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+}
+
+header.sticky {
+    background: #fff;
+    padding: 10px 100px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+header .logo {
+    color: #fff;
+    font-weight: 700;
+    font-size: 2em;
+    text-decoration: none;
+}
+
+header.sticky .logo {
+    color: #111;
+}
+
+header .logo span {
+    color: var(--active-color);
+}
+
+header .navigation {
+    position: relative;
+    display: flex;
+}
+
+header .navigation li {
+    list-style: none;
+    margin-left: 30px;
+}
+
+
+header .navigation li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 300;
+}
+
+header.sticky .navigation li a {
+    color: #111;
+    font-size: 18px;
+}
+
+header.sticky .navigation li a:hover {
+    color: var(--active-color);
+    text-decoration: underline var(--active-color);
+}
+
+
+
+/*section {*/
+/*    padding: 100px;*/
+/*}*/
+
+
+.titletext {
+    color: #111;
+    font-size: 2em;
+    font-weight: 300;
+}
+
+.titletext span {
+    color: var(--active-color);
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.service-menu{
+    margin: 15px;
+}
+.service-menu .content {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+#img-book {
+    color: #1e2746;
+}
+
+.service-menu .content .box {
+    width: 300px;
+    margin: 20px;
+    border: 15px solid #fff;
+    box-shadow: 0 5px 35px rgba(0, 0, 0, 0.08);
+    /*criar o fundo branco da imagem*/
+}
+
+.service-menu .content .box .imgBx {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.service-menu .content .box .imgBx i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--active-color-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 250px;
+    object-fit: cover;
+}
+
+.service-menu .content .box .text {
+    padding: 15px 0 5px;
+    font-weight: 400;
+    color: #111;
+    text-align: center;
+}
+
+
+@media (max-width: 991px) {
+    header, header.stiky {
+        padding: 10px 20px;
+    }
+
+    header .navigation {
+        display: none;
+    }
+
+    header .navigation.active {
+        width: 100%;
+        height: calc(100% - 68px);
+        position: fixed;
+        top: 68px;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #fff;
+    }
+
+    header .navigation li {
+        margin-left: 0;
+    }
+
+    header .navigation li a {
+        color: #111;
+        font-size: 1.6em;
+    }
+
+    .menuToggle {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        /*background-imagens: url(../imagens/menu-hamburger.png);*/
+        background-image: url(../imagens/menu-hamburguer.png);
+
+        background-size: 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        color: #fff
+    }
+
+    .menuToggle.active {
+        /*background-imagens: url(../imagens/menu-menu-close.png);*/
+        background-image: url(../imagens/menu-close.png);
+
+        background-size: 25px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+
+    }
+
+    header.sticky .menuToggle {
+        filter: invert(1);
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    .banner .content h2 {
+        font-size: 3em;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .row .col50 {
+        position: relative;
+        width: 100%;
+    }
+
+    .row .col50 .imgBx {
+        height: 300px;
+        margin-top: 20px;
+    }
+
+    .menu .content {
+        margin-top: 20px;
+    }
+
+    .menu .content .box {
+        margin: 10px;
+    }
+
+    .menu .content .box .imgBx {
+        height: 260px;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .titletext {
+        font-size: 1.7em;
+        line-height: 1.5em;
+        margin-bottom: 15px;
+        font-weight: 300;
+    }
+
+    .testimonials .content .box {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .contactForm {
+        padding: 35px 40px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 420px) {
+    .banner .content h2 {
+        font-size: 2.2em;
+        color: #fff;
+        font-weight: bold;
+    }
+}
+
+@media (max-width: 390px) {
+    header.sticky {
+        padding: 10px 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+}

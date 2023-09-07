@@ -1,0 +1,14 @@
+<a th:fragment="paging-funcionario(totalPages, label, tooltip)" class="page-link"
+
+   th:href="@{'/v1/app/cpd/funcionarios/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}"
+  th:title="${tooltip}" rel="tooltip">
+  [[${label}]]
+</a>
+
+
+<a th:fragment="paging-postagem(totalPages, label, tooltip)" class="page-link"
+
+   th:href="@{'/v1/app/cpd/postagens/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}"
+   th:title="${tooltip}" rel="tooltip">
+  [[${label}]]
+</a>
