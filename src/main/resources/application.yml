@@ -8,7 +8,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
     show-sql: true
+    database: mysql
+
 
 logging:
   level:
@@ -16,3 +19,5 @@ logging:
       hibernate:
         SQL: DEBUG
         type: TRACE
+server:
+  port: 8080
