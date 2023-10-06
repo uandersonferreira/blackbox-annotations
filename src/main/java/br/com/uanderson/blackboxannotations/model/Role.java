@@ -25,6 +25,10 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "roles")
     private List<Funcionario> funcionarios;
 
+    public Role(String name) {
+        this.name = name;
+    }
+
     @Override
     public String getAuthority() {
         return this.name;

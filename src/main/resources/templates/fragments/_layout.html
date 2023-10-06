@@ -20,12 +20,10 @@
     <!-- font-awesome -->
     <link rel="stylesheet" href="/webjars/font-awesome/6.4.0/css/all.css">
 
-
     <!-- TinyMCE CDN -->
     <script src="https://cdn.tiny.cloud/1/0ay3sij1cm0sdyn1bm3r95jrnhisbwg8kguyvxh82yqsmh4x/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script src="/tinymce/tinymce.min.js"></script>
-
     <script src="/js/tinymce-config.js"></script>
 
 </head>
@@ -37,10 +35,44 @@
 <section class="home">
     <aside th:replace="~{fragments/_menuTop ::menuTop}"></aside>
     <main class="layout-content" layout:fragment="corpo">
-        <h1>
-            This main content will be decorated by the actual page returned
-            in the controller methods.
-        </h1>
+        <div class="container row m-5">
+
+            <div class="card mx-4" style="width: 18rem;">
+                <img src="/imagens/people.svg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciamento de Usuários</h5>
+                    <p class="card-text">
+                        Cadastre, atualize, filtre e delete usuários de forma fácil e rápido
+                    </p>
+                    <a th:href="@{/v1/app/cpd/funcionarios/list}" class="btn btn-primary">Acessar</a>
+                </div>
+            </div>
+
+            <div class="card mx-4" style="width: 18rem;">
+                <img src="/imagens/book.svg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Postagens</h5>
+                    <p class="card-text">
+                        Registre os ocorridos durante o dia e deixe os demais atualizados de forma, rápida e descompicada.
+                    </p>
+                    <a th:href="@{/v1/app/cpd/postagens/list}"
+                       class="btn btn-primary"
+                    >Acessar
+                    </a>
+                </div>
+            </div>
+
+            <div class="card mx-4" style="width: 18rem;">
+                <img src="/imagens/cog.svg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Configurações</h5>
+                    <p class="card-text">
+                        Visualize suas informações pessoais e configurações, básicas da aplicação
+                    </p>
+                    <a href="#" class="btn btn-primary">Acessar</a>
+                </div>
+            </div>
+        </div>
     </main>
 </section>
 <footer th:replace="~{fragments/_footer :: footer}"></footer>

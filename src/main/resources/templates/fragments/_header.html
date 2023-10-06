@@ -15,7 +15,7 @@
         <!-- -------- Non Dropdown List Item ------- -->
         <li>
             <div class="title">
-                <a class="link">
+                <a th:href="@{/layout}"  class="link">
                     <i class='bx bx-grid-alt'></i>
                     <span class="name">Dashboard</span>
                 </a>
@@ -30,7 +30,7 @@
         <!-- -------- Dropdown List Item ------- -->
         <li class="dropdown">
             <div class="title">
-                <a class="link">
+                <a th:href="@{/v1/app/cpd/funcionarios/list}" class="link">
                     <i class='bx bx-user'></i>
                     <span class="name">Funcionários</span>
                 </a>
@@ -62,7 +62,7 @@
         <!-- -------- Dropdown List Item ------- -->
         <li class="dropdown">
             <div class="title">
-                <a href="#" class="link">
+                <a th:href="@{/v1/app/cpd/postagens/list}" class="link">
                     <i class='bx bx-book-alt'></i>
                     <span class="name">Anotações</span>
                 </a>
@@ -109,14 +109,14 @@
         <!-- -------- Dropdown exit ------- -->
         <li>
             <div class="title">
-                <a href="#" class="link">
+                <a th:href="@{/logout}" class="link">
                     <i class='bx bx-exit'></i>
                     <span class="name">Sair</span>
                 </a>
                 <!-- <i class='bx bxs-chevron-down'></i> -->
             </div>
             <div class="submenu">
-                <a href="#" class="link submenu-title">sair</a>
+                <a th:href="@{/logout}" class="link submenu-title">sair</a>
                 <!-- submenu links here  -->
             </div>
         </li>

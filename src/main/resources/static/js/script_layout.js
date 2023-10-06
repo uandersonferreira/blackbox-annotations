@@ -27,6 +27,27 @@ logo.addEventListener("click", () => {
 
 
 
+// SELECTION OPTIONS CARGOS CADASTRO FUNCIÓNÁRIO
+const selectCargo = document.getElementById("cargo");
+const selectedOptionsList = document.getElementById("selected-options-list");
+
+selectCargo.addEventListener("change", () => {
+    const selectedOptions = Array.from(selectCargo.selectedOptions);
+    selectedOptionsList.innerHTML = "";
+
+    if (selectedOptions.length === 0) {
+        selectedOptionsList.innerHTML = "Nenhuma opção selecionada.";
+    } else {
+        selectedOptions.forEach((option) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = option.textContent;
+            selectedOptionsList.appendChild(listItem);
+        });
+    }
+});
+
+
+
 
 //-----------------------
 $(function () {
