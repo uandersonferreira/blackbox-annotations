@@ -8,20 +8,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FuncionarioService implements UserDetailsService {
+public class FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
 
     public Page<Funcionario> listAllPageable(Pageable pageable) {
@@ -85,16 +81,11 @@ public class FuncionarioService implements UserDetailsService {
         return funcionarioRepository.findAll(pageRequest);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return Optional.ofNullable(
-                        funcionarioRepository.findByLogin(username))
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("Funcionário '%s' não encontrado!", username)));
-    }
 
     private PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
 
 
 }//class
