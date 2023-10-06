@@ -38,11 +38,8 @@ public class FuncionarioService {
     public Funcionario save(Funcionario funcionario){
         Funcionario newFuncionario = Funcionario.builder()
                 .nome(funcionario.getNome())
-                .login(funcionario.getLogin())
                 .cargo(funcionario.getCargo())
-                .senha(funcionario.getSenha())
                 .dataNascimento(funcionario.getDataNascimento())
-                .permissao(funcionario.getPermissao())
                 .build();
 
         return funcionarioRepository.save(newFuncionario);
@@ -58,11 +55,8 @@ public class FuncionarioService {
         Funcionario funcionario = Funcionario.builder()
                 .id(funcionarioSalvo.getId())
                 .nome(funcionarioRequest.getNome())
-                .login(funcionarioRequest.getLogin())
                 .cargo(funcionarioRequest.getCargo())
-                .senha(funcionarioRequest.getSenha())
                 .dataNascimento(funcionarioRequest.getDataNascimento())
-                .permissao(funcionarioRequest.getPermissao())
                 .build();
 
         funcionarioRepository.save(funcionario);

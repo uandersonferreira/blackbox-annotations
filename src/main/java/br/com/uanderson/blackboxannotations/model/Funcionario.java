@@ -24,14 +24,13 @@ public class Funcionario implements Serializable {
     @NotEmpty(message = "Este campo não pode ser vazio!")
     @Column(unique = true)
     private String nome;
-    private String login;//login
-    @NotEmpty(message = "Este campo não pode ser vazio!")
-    private String senha;
+    private String matricula;//login
     @NotEmpty(message = "Este campo não pode ser vazio!")
     private String cargo;
-    @PastOrPresent(message = "Você nasceu no futuro? ")
+    @PastOrPresent(message = "Você nasceu no futuro ? ")
     private LocalDate dataNascimento;
-    private String permissao;//ROLES_ADMIN, ROLES_USER
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserDetailsApplication userDetailsApplication;
 
 
 }
