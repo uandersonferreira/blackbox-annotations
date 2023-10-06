@@ -2,8 +2,11 @@ package br.com.uanderson.blackboxannotations.controller;
 
 import br.com.uanderson.blackboxannotations.model.Funcionario;
 import br.com.uanderson.blackboxannotations.service.FuncionarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,13 +36,11 @@ public class FuncionarioController {
     }
 
     @PostMapping(path = "/save")
-    public ModelAndView save(Funcionario funcionario, BindingResult bindingResult) {
+    public ModelAndView save(@Valid Funcionario funcionario, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return mostrarPaginaDeCadastro(funcionario);//Retorna o funcionario para a page de cadrastro, preservando os dados do objeto/Funcionario
             //que tentou realizar a ação.
         }
-
-//        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
         funcionarioService.save(funcionario);//Se não tiver erro, irá salvar o Funcionário
         return mostrarPaginaDeCadastro(new Funcionario());//É retornar a page de mostrarPaginaDeCadastro com um novo funcionário vazio;
     }
@@ -58,8 +59,10 @@ public class FuncionarioController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(Funcionario funcionario, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return mostrarPaginaDeCadastro(funcionario);
+    public ModelAndView update(@Valid Funcionario funcionario, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return mostrarPaginaDeCadastro(funcionario);
+        }
 
         funcionarioService.update(funcionario);
         return new ModelAndView("redirect:/v1/app/cpd/funcionarios/list");
@@ -89,7 +92,6 @@ public class FuncionarioController {
 
         return "funcionario/listar_funcionario";
     }
-
 
 
 }//class

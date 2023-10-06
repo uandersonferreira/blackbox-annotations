@@ -8,14 +8,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FuncionarioService {
+public class FuncionarioService implements UserDetailsService {
     private final FuncionarioRepository funcionarioRepository;
 
     public Page<Funcionario> listAllPageable(Pageable pageable) {
@@ -36,13 +42,12 @@ public class FuncionarioService {
     //salvar a data como data é mudar somente a apresentação dela para o usuário
     //encriptografar a senha
     public Funcionario save(Funcionario funcionario){
-        Funcionario newFuncionario = Funcionario.builder()
-                .nome(funcionario.getNome())
-                .cargo(funcionario.getCargo())
-                .dataNascimento(funcionario.getDataNascimento())
-                .build();
+        if (funcionario == null){
+            throw new IllegalArgumentException("Objeto Funcionário vazio.");
+        }
 
-        return funcionarioRepository.save(newFuncionario);
+        funcionario.setSenha(passwordEncoder().encode(funcionario.getPassword()));
+        return funcionarioRepository.save(funcionario);
     }
 
     public void delete(long id){
@@ -57,6 +62,9 @@ public class FuncionarioService {
                 .nome(funcionarioRequest.getNome())
                 .cargo(funcionarioRequest.getCargo())
                 .dataNascimento(funcionarioRequest.getDataNascimento())
+                .matricula(funcionarioRequest.getMatricula())
+                .login(funcionarioSalvo.getLogin())
+                .senha(passwordEncoder().encode(funcionarioSalvo.getPassword()))
                 .build();
 
         funcionarioRepository.save(funcionario);
@@ -76,4 +84,17 @@ public class FuncionarioService {
         }
         return funcionarioRepository.findAll(pageRequest);
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return Optional.ofNullable(
+                        funcionarioRepository.findByLogin(username))
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("Funcionário '%s' não encontrado!", username)));
+    }
+
+    private PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+
 }//class

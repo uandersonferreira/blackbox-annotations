@@ -17,4 +17,5 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
                     OR f.cargo LIKE %?1%
             """)
         Page<Funcionario> findAll(String keyword, Pageable pageable);
+        Funcionario findByLogin(String login);
 }
