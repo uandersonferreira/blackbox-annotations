@@ -77,7 +77,7 @@ public class FuncionarioService {
     public Page<Funcionario> findAllPaginated(int pageNow, int pageSize, String sortField,
                                               String sortDirection, String keyword) {
 
-        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+        Sort sort = sortDirection.equalsIgnoreCase("asc") ? Sort.by(sortField).ascending()
                 : Sort.by(sortField).descending();
 
         PageRequest pageRequest = PageRequest.of((pageNow - 1), pageSize, sort);
@@ -98,6 +98,13 @@ public class FuncionarioService {
         return Arrays.stream(cargos.split(","))//separação por vírgula
                 .map(Role::new)//tranforma o array de Strings em um SimpleGrantedAuthority
                 .collect(Collectors.toList());
+        /*
+                    <option value="CPD">
+                    <option value="REPOSITOR">
+                    <option value="LÍDER">
+                    <option value="GERENTE">
+                    <option value="OPERADOR">
+         */
     }
 
 

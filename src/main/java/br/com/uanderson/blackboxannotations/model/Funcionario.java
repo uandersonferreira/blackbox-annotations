@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
@@ -50,6 +49,9 @@ public class Funcionario implements UserDetails {
     )
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "funcionario")
+    private List<Postagem> postagems;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -84,5 +86,20 @@ public class Funcionario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", nome='" + nome + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", cargo='" + cargo + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", roles=" + roles +
+                ", postagems=" + postagems +
+                '}';
     }
 }

@@ -59,6 +59,22 @@ p {
     gap: 30px;
     justify-content: center;
 }
+.content .group-btn .btn-destaque{
+    font-size: 1.2em;
+    color: #fff;
+    background: var(--active-color);
+    display: inline-block;
+    padding: 16px 96px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: 0.5s;
+}
+
+.content .group-btn .btn-destaque:hover{
+    letter-spacing: 6px;
+}
 
 .btn-destaque {
     font-size: 1em;
@@ -71,11 +87,9 @@ p {
     text-decoration: none;
     letter-spacing: 2px;
     transition: 0.5s;
-
 }
-
-.btn:hover {
-    letter: spacing 6px;
+.btn-destaque:hover {
+    letter-spacing: 5px;
 }
 
 header {

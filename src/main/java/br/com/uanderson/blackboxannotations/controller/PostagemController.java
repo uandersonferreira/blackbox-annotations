@@ -1,5 +1,6 @@
 package br.com.uanderson.blackboxannotations.controller;
 
+import br.com.uanderson.blackboxannotations.model.Funcionario;
 import br.com.uanderson.blackboxannotations.model.Postagem;
 import br.com.uanderson.blackboxannotations.service.PostagemService;
 import br.com.uanderson.blackboxannotations.util.UploadUtil;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +37,9 @@ public class PostagemController {
     @PostMapping(path = "/save",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView cadastroDeClient(@ModelAttribute Postagem postagem, @RequestParam("file") MultipartFile imagem){
+    public ModelAndView cadastroDeClient(@ModelAttribute Postagem postagem,
+                                         @RequestParam("file") MultipartFile imagem,
+                                         @AuthenticationPrincipal Funcionario funcionario){
         ModelAndView mv =  new ModelAndView("anotacoes/create_post");
 
         mv.addObject("postagem", postagem);
@@ -44,7 +48,7 @@ public class PostagemController {
             if (UploadUtil.fazerUploadImagem(imagem, uuid)) {
                 postagem.setImagem( uuid + imagem.getOriginalFilename());
             }
-
+            postagem.setFuncionario(funcionario);
             postagemService.save(postagem);
            log.info("Salvo com sucesso: '{}' ", postagem.getTitulo() + " " + postagem.getImagem());
 
@@ -57,9 +61,9 @@ public class PostagemController {
     }
 
     @GetMapping(path = "/list")
-    public String listAllPageable(Model model) {
+    public String listAllPageable(Model model,  @AuthenticationPrincipal Funcionario funcionario) {
         String keyword = "";
-        return mostrarBuscaPaginada(1, "titulo", "asc", keyword, model);
+        return mostrarBuscaPaginada(1, "titulo", "asc", keyword, model, funcionario);
     }
 
     @GetMapping(path = "/page/{pageNow}")
@@ -67,7 +71,7 @@ public class PostagemController {
                                        @RequestParam("sortField") String sortField,
                                        @RequestParam("sortDir") String sortDir,
                                        @RequestParam("keyword") String keyword,
-                                       Model model) {
+                                       Model model, @AuthenticationPrincipal Funcionario funcionario) {
         int pageSize = 3;
 
         Page<Postagem> page = postagemService.findAllPaginated(pageNow, pageSize, sortField, sortDir, keyword);
@@ -83,6 +87,8 @@ public class PostagemController {
         model.addAttribute("keyword", keyword);
 
         model.addAttribute("postagens", postagens);
+        model.addAttribute("idFuncionarioLogado", funcionario.getId());
+
 
         return "anotacoes/listar_anotacoes";
     }

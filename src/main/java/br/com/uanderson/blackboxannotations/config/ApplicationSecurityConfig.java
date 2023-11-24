@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -31,11 +32,20 @@ public class ApplicationSecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                     .requestMatchers("/css/**", "/js/**","/imagens/**", "/webjars/**").permitAll()
                     .requestMatchers("/login/**").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/funcionario/login-registrar/save").permitAll()
                     .requestMatchers("/", "/home").permitAll()
                     .anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form.loginPage("/login").permitAll()
+                        .loginProcessingUrl("/process-login")
+                        .defaultSuccessUrl("/layout")
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                )
                 .logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/?logout=true").permitAll()
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
                 )
                 .httpBasic(Customizer.withDefaults());
         return http.build();
@@ -43,7 +53,7 @@ public class ApplicationSecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        log.info("Password encoder[123] {}", passwordEncoder().encode("123"));
+        log.info("Password encoder[123] {}", passwordEncoder().encode("master@2023"));
         return config.getAuthenticationManager();
     }
 

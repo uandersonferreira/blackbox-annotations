@@ -44,6 +44,7 @@ public class PostagemService {
                 .conteudo(postagem.getConteudo())
                 .imagem(postagem.getImagem())
                 .dataCriacao(LocalDateTime.now())
+                .funcionario(postagem.getFuncionario())
                 .dataAtualizacao(LocalDateTime.now())
                 .build();
 
@@ -63,6 +64,7 @@ public class PostagemService {
                 .conteudo(postagemRequest.getConteudo())
                 .imagem(postagemRequest.getImagem())
                 .dataCriacao(postagemSalva.getDataCriacao())
+                .funcionario(postagemSalva.getFuncionario())
                 .dataAtualizacao(LocalDateTime.now())
                 .build();
 

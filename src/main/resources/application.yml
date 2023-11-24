@@ -21,3 +21,9 @@ logging:
         type: TRACE
 server:
   port: 8080
+
+
+  thymeleaf:
+    allow-request-attributes: true
+    allow-session-attributes: true
+    allow-servlet-context-attributes: true

@@ -28,5 +28,10 @@ public class Postagem {
     private LocalDateTime dataCriacao;//= LocalDateTime.now()
     private LocalDateTime dataAtualizacao;
 
+    @ManyToOne
+    @JoinColumn
+    private Funcionario funcionario;
+
+
 
 }//class

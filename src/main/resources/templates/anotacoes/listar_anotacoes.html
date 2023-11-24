@@ -68,12 +68,12 @@
                         </a>
 
                         <ul>
-                            <li>
+                            <li th:if="${p.funcionario.getId() == idFuncionarioLogado}">
                                 <a th:href="@{/v1/app/cpd/postagens/editar/{id}(id=${p.id})}">
                                     <i class="fa-solid fa-pen-to-square "></i>
                                 </a>
                             </li>
-                            <li>
+                            <li th:if="${p.funcionario.getId() == idFuncionarioLogado}">
                                 <a style="color: red"
                                    onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
                                    th:href="@{/v1/app/cpd/postagens/delete/{id}(id=${p.id})}">
@@ -90,18 +90,17 @@
 
                         <div class="info-post">
                            <p class="data">
-                               <span>Uanderson</span>
+                               <span th:text="${p.getFuncionario().getNome()}"></span>
                            </p>
 
                             <div class="data-right">
                                 <p class="">Criando em:
-                                    <span th:text="${#temporals.format(p.getDataCriacao(), 'dd MMMM yyyy HH:mm')}"></span>
+                                    <span th:text="${#temporals.format(p.getDataCriacao(), 'dd MMM yyyy HH:mm')}"></span>
                                 </p>
                                 <p class="">Modificado em:
-                                    <span th:text="${#temporals.format(p.getDataAtualizacao(), 'dd MMMM yyyy HH:mm')}"></span>
+                                    <span th:text="${#temporals.format(p.getDataAtualizacao(), 'dd MMM yyyy HH:mm')}"></span>
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>

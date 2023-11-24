@@ -23,19 +23,19 @@
 
     </div>
 
-    <ul class="navigation">
+  <ul class="navigation">
         <li>
             <a href="#"  onclick="toggleMenu();">BlackBox</a>
-        </li>
-        <li>
-            <a href="#"  onclick="toggleMenu();">Coletores</a>
         </li>
         <li>
             <a href="#"  onclick="toggleMenu();">Faqs e Ajuda</a>
         </li>
         <li>
-            <a href="#"  onclick="toggleMenu();">Contatos</a>
+            <a href="#service-menu"  onclick="toggleMenu();">Serviços</a>
         </li>
+         <li>
+          <a href="#sobre"  onclick="toggleMenu();">Desenvolvedor</a>
+      </li>
     </ul>
     <!--        <div class="menu-btn" id="menu-btn">-->
     <!--            <i class="fa-solid fa-bars" id="menu-icon"></i>-->
@@ -45,12 +45,12 @@
 <section class="banner" id="banner">
     <div class="content">
         <h2 class="h2">Diário de Bordo</h2>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore odit obcaecati, repellendus unde dolorem assumenda vero hic praesentium nostrum maiores.
-        </p>
+<!--        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore odit obcaecati, repellendus unde dolorem assumenda vero hic praesentium nostrum maiores.-->
+<!--        </p>-->
         <div class="group-btn">
             <a th:href="@{/login}" class="btn-destaque">Logar</a> <!--Chamar um controller que leve para a page de login-->
 <!--            <a th:href="@{/login/registrar}" class="btn-destaque">Cadastra-se</a>-->
-            <a th:href="@{/layout}" class="btn-destaque">Dashboard</a>
+<!--            <a th:href="@{/layout}" class="btn-destaque">Dashboard</a>-->
         </div>
 
     </div>
@@ -60,39 +60,49 @@
     <div class="title">
         <h2 class="titletext"><span>S</span>erviços</h2>
         <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit,
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Acesse e aproveite os nossos serviços disponíveis.
         </p>
     </div>
 
     <div class="content">
         <div class="box">
             <div class="imgBx" >
-                <i class="fa-regular fa-file-lines"></i>
+<!--                <i class="fa-regular fa-file-lines"></i>-->
+                <img src="/imagens/people.svg" class="card-img-top" alt="..." style="height: 220px;">
+                <p class="card-text">
+                    Cadastre, atualize, filtre e delete usuários de forma fácil e rápida.
+                </p>
             </div>
 
-            <div class="text">
+            <div class="text mt-2">
                     <a th:href="@{/login}" class="btn-destaque">Acessar</a>
             </div>
         </div>
 
         <div class="box">
             <div class="imgBx" >
-                <i class="fa-regular fa-file-lines"></i>
+<!--                <i class="fa-regular fa-file-lines"></i>-->
+                <img src="/imagens/book.svg" class="card-img-top" alt="..." style="height: 220px;">
+                <p class="card-text">
+                    Registre os ocorridos durante o dia e deixe os demais atualizados de forma, rápida e descomplicada.
+                </p>
             </div>
 
-            <div class="text">
+            <div class="text mt-2">
                     <a th:href="@{/login}" class="btn-destaque">Acessar</a>
             </div>
         </div>
 
         <div class="box">
             <div class="imgBx" >
-                <i class="fa-regular fa-file-lines"></i>
+<!--                <i class="fa-regular fa-file-lines"></i>-->
+                <img src="/imagens/cog.svg" class="card-img-top" alt="..." style="height: 220px;">
+                <p class="card-text">
+                    Visualize suas informações pessoais e configurações, básicas da aplicação.
+                </p>
             </div>
 
-            <div class="text">
+            <div class="text mt-2">
                     <a th:href="@{/login}" class="btn-destaque">Acessar</a>
             </div>
         </div>

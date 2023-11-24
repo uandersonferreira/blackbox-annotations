@@ -1,7 +1,11 @@
-<aside class="toggle-sidebar" th:fragment="menuTop">
+<aside class="toggle-sidebar" th:fragment="menuTop" >
   <div class="menu-icon">
     <i class='bx bx-menu'></i>
     <div class="text">Menu</div>
+  </div>
+
+  <div>
+    Usuário logado: <span th:text="${#authentication.getName()}" style="text-transform: uppercase; text-align: end"></span>
   </div>
 
   <div class="date-time">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +34,11 @@
 <!-- ============= Home Section =============== -->
 <section class="home">
     <aside th:replace="~{fragments/_menuTop ::menuTop}"></aside>
+
+<!--    <div class="alert  alert-success alert-dismissible fade show" role="alert">-->
+<!--        <p>Olá, <span sec:authentication="name" ></span></p>-->
+<!--    </div>-->
+
     <main class="layout-content" layout:fragment="corpo">
         <div class="container row m-5">
 
@@ -53,7 +58,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Postagens</h5>
                     <p class="card-text">
-                        Registre os ocorridos durante o dia e deixe os demais atualizados de forma, rápida e descompicada.
+                        Registre os ocorridos durante o dia e deixe os demais atualizados de forma, rápida e descomplicada.
                     </p>
                     <a th:href="@{/v1/app/cpd/postagens/list}"
                        class="btn btn-primary"

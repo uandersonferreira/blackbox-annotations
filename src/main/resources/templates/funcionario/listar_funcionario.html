@@ -77,14 +77,16 @@
                     <th scope="row" th:text="${f.id}"></th>
                     <td th:text="${f.nome}"></td>
                     <td th:text="${f.cargo}"></td>
-                    <td>
-                        <a th:href="@{/v1/app/cpd/funcionarios/editar/{id}(id=${f.id})}">
+                    <td >
+                        <a th:if="${f.getId() == idFuncionarioLogado}"
+                            th:href="@{/v1/app/cpd/funcionarios/editar/{id}(id=${f.id})}">
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td> <!--pessoas/edit/1 - CONTROLLER -->
 
                     <td>
                         <a style="color: red"
+                           th:if="${f.getId() == idFuncionarioLogado}"
                            onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
                            th:href="@{/v1/app/cpd/funcionarios/delete/{id}(id=${f.id})}">
                             <i class="fa-solid fa-trash"></i>

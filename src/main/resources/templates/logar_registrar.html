@@ -10,74 +10,98 @@
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.0/css/all.css}">
 </head>
 <body>
-    <input type="checkbox" id="click">
-    <div class="main-container">
-        <div class="form-container">
-            <div class="sign-in">
-                <form action="#">
-                    <h1>Logar com</h1>
-                    <div class="social-container">
-                        <a href="#" class="fab fa-facebook-f"></a>
-                        <a href="#" class="fab fa-google-plus-g"></a>
-                        <a href="#" class="fab fa-linkedin-in"></a>
-                    </div>
-                    <span>ou sua conta</span>
-                    <input type="text" placeholder="login">
-                    <input type="password" placeholder="senha">
-                    <a href="#" class="fogot-pass">Esqueceu sua senha?</a>
-                    <button type="submit">Entrar</button>
-                </form>
-            </div><!--sign-in-->
 
-            <div class="sign-up">
-                <form th:action="@{/cadastrar}" method="get">
-                    <h1>Criar conta com</h1>
-                    <div class="social-container">
-                        <a href="#" class="fab fa-facebook-f"></a>
-                        <a href="#" class="fab fa-google-plus-g"></a>
-                        <a href="#" class="fab fa-linkedin-in"></a>
-                    </div>
-                    <span>ou informe seus dados abaixo</span>
-                    <input type="text" placeholder="Nome" name="nome">
-                    <input type="text" placeholder="login" name="login">
-                    <input type="date" placeholder="Data de Nascimento" name="data_nascimento" title="Informe a sua data de nascimento">
+<!--<div th:if="${param.error}">-->
+<!--    Invalid username and password.-->
+<!--</div>-->
+<!--<div th:if="${param.logout}">-->
+<!--    You have been logged out.-->
+<!--</div>-->
+<!--<div>-->
+<!--    <span th:text="mensagem"></span>-->
+<!--</div>-->
 
-                    <input list="cargos" id="cargo" placeholder="Cargo" name="cargo" title="Informe o seu Cargo">
-                    <datalist id="cargos">
-                        <option value="CPD">
-                        <option value="REPOSITOR">
-                        <option value="LÍDER">
-                        <option value="GERENTE">
-                        <option value="OPERADOR">
-                    </datalist>
+<script th:if="${param.error}">
+    alert('Ops,Login ou Senha Incorretos!');
+</script>
 
-                    <input type="password" placeholder="senha" name="senha">
-                    <a href="#" class="fogot-pass">Esqueceu sua senha?</a>
-                    <button type="submit">Entrar</button>
-                </form>
-            </div><!--sign-up-->
+<script th:if="${param.logout}">
+    alert('Você está sendo deslogado...');
+</script>
 
-            <div class="slide-container">
-                <div class="slide-panel">
-                    <div class="slide-left">
-                        <h1>Olá, Seja
-                            <br>bem-vindo!
-                        </h1>
-                        <p>Crie uma nova conta agora é aproveite as nossas funcionalidades</p>
-                        <label for="click" class="slide">Criar conta</label>
-                    </div>
-                    <div class="slide-right">
-                        <h1>Seja bem-vindo de volta!</h1>
-                        <p>Para se manter conectado conosco, faça o login com suas informações pessoais</p>
-                        <label for="click" class="slide">Entrar</label>
-                    </div>
+<input type="checkbox" id="click">
+<div class="main-container">
+    <div class="form-container">
+        <div class="sign-in">
+            <form th:action="@{/process-login}" method="post">
+                <h1>Logar com sua conta</h1>
+<!--                <div class="social-container">-->
+<!--                    <a href="#" class="fab fa-facebook-f"></a>-->
+<!--                    <a href="#" class="fab fa-google-plus-g"></a>-->
+<!--                    <a href="#" class="fab fa-linkedin-in"></a>-->
+<!--                </div>-->
+<!--                <span>ou sua conta</span>-->
+                <input type="text" name="username" placeholder="login">
+                <input type="password" name="password" placeholder="senha">
+                <button type="submit">Entrar</button>
+                <a href="#" class="fogot-pass">Esqueceu sua senha?</a>
+                <a href="/" class="btn">Voltar home</a>
+            </form>
+
+        </div><!--sign-in-->
+
+        <div class="sign-up">
+            <form th:action="@{/funcionario/login-registrar/save}"
+                  method="post" th:object="${funcionario}">
+
+                <h1>Criar conta </h1>
+<!--                <div class="social-container">-->
+<!--                    <a href="#" class="fab fa-facebook-f"></a>-->
+<!--                    <a href="#" class="fab fa-google-plus-g"></a>-->
+<!--                    <a href="#" class="fab fa-linkedin-in"></a>-->
+<!--                </div>-->
+                <span>informe seus dados abaixo</span>
+                <input type="text" placeholder="Nome" name="nome" th:field="*{nome}">
+                <input type="text" placeholder="Matricula" name="matricula" th:field="*{matricula}">
+                <input type="text" placeholder="login" name="login" th:field="*{login}">
+                <input type="date" placeholder="Data de Nascimento" name="data_nascimento" th:field="*{dataNascimento}">
+
+                <input list="cargos" id="cargo" placeholder="Cargo" name="cargo" title="Informe o seu Cargo" th:field="*{cargo}">
+                <datalist id="cargos">
+                    <option value="CPD">
+                    <option value="REPOSITOR">
+                    <option value="LÍDER">
+                    <option value="GERENTE">
+                    <option value="OPERADOR">
+                </datalist>
+
+                <input type="password" placeholder="senha" name="senha" th:field="*{senha}">
+                <button type="submit">Entrar</button>
+                <a href="#" class="fogot-pass">Esqueceu sua senha?</a>
+                <a href="/" class="btn">Voltar home</a>
+
+            </form>
+        </div><!--sign-up-->
+
+        <div class="slide-container">
+            <div class="slide-panel">
+                <div class="slide-left">
+                    <h1>Olá, Seja
+                        <br>bem-vindo!
+                    </h1>
+                    <p>Crie uma nova conta agora é aproveite as nossas funcionalidades</p>
+                    <label for="click" class="slide">Criar conta</label>
                 </div>
-
+                <div class="slide-right">
+                    <h1>Seja bem-vindo de volta!</h1>
+                    <p>Para se manter conectado conosco, faça o login com suas informações pessoais</p>
+                    <label for="click" class="slide">Entrar</label>
+                </div>
             </div>
+        </div>
 
+    </div><!--form-container-->
+</div><!--main-container-->
 
-        </div><!--form-container-->
-    </div><!--main-container-->
-    
 </body>
 </html>
