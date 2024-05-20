@@ -81,7 +81,7 @@ public class FuncionarioController {
 
         Page<Funcionario> page = funcionarioService.findAllPaginated(pageNow, pageSize, sortField, sortDir, keyword);
         List<Funcionario> funcionarios = page.getContent();
-
+        
         model.addAttribute("currentPage", pageNow);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());

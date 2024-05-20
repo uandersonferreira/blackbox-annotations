@@ -2,7 +2,7 @@ spring:
   application:
     name: blackbox-annotations
   datasource:
-    url: jdbc:mysql://localhost:3306/db_blackbox?createDatabaseIfNotExist=true
+    url: jdbc:mysql://db:3308/db_blackbox?createDatabaseIfNotExist=true
     username: root
     password: root
   jpa:
@@ -20,7 +20,7 @@ logging:
         SQL: DEBUG
         type: TRACE
 server:
-  port: 8080
+  port: 8090
 
 
   thymeleaf:
