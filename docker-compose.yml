@@ -1,31 +1,42 @@
-version: '3.1'
+version: '3.8'
+
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev  # Ativa o perfil 'dev' para configurações específicas do ambiente de desenvolvimento
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mydatabase  # URL do banco de dados MySQL
+      - SPRING_DATASOURCE_USERNAME=root  # Nome de usuário do banco de dados MySQL
+      - SPRING_DATASOURCE_PASSWORD=root  # Senha do banco de dados MySQL
+    depends_on:
+      - db  # Garante que o serviço 'db' seja iniciado antes do serviço 'app'
+
   db:
-    image: mysql
+    image: mysql:latest  # Usa a imagem oficial do MySQL
     container_name: mysql-container-blackbox
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root  # Define a senha do usuário root do MySQL
+      MYSQL_DATABASE: mydatabase  # Define o nome do banco de dados a ser criado
     ports:
-      - "3306:3306"
+      - "3306:3306"  # Mapeia a porta 3306 do host para a porta 3306 do container
     volumes:
-      - blackbox_data:/var/lib/mysql-blackbox
+      - blackbox_data:/var/lib/mysql  # Mapeia o volume para persistência dos dados do MySQL
+
 volumes:
-  blackbox_data:
+  blackbox_data:  # Volume para persistência dos dados do MySQL
 
-#    COMANDOS DOCKER (Pesquisar as opções disponiveis para cada comando)
 
-#    docker run: Executa um contêiner a partir de uma imagem.
-#    docker build: Cria uma nova imagem a partir de um Dockerfile.
-#    docker pull: Baixa uma imagem do Docker Hub ou de um registro.
-#    docker ps: Lista contêineres em execução.
-#    docker images: Lista imagens disponíveis localmente.
-#    docker stop: Para um ou mais contêineres em execução.
-#    docker start: Inicia um contêiner parado.
-#    docker restart: Reinicia um contêiner.
-#    docker exec: Executa um comando dentro de um contêiner em execução.
-#    docker rm: Remove um ou mais contêineres.
-#    docker rmi: Remove uma ou mais imagens.
-#    docker network: Gerencia redes Docker.
-#    docker volume: Gerencia volumes Docker.
-#    docker-compose up -d: Inicia serviços definidos em um arquivo Docker Compose no modo de segundo plano.
-#    docker-compose down: Para e remove contêineres definidos em um arquivo Docker Compose.
+
+
+
+
+
+
+
+
+
+
