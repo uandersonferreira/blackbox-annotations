@@ -12,7 +12,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
 
 logging:
