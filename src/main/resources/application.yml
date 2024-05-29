@@ -2,16 +2,13 @@ spring:
   application:
     name: blackbox-annotations
   datasource:
-    url: jdbc:mysql://db:3308/db_blackbox?createDatabaseIfNotExist=true
-    username: root
-    password: root
+    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+    username: ${MYSQLUSER}
+    password: ${MYSQLPASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
-
+      ddl-auto: validate
     show-sql: true
-    database: mysql
-
 
 logging:
   level:
@@ -19,9 +16,6 @@ logging:
       hibernate:
         SQL: DEBUG
         type: TRACE
-server:
-  port: 8090
-
 
   thymeleaf:
     allow-request-attributes: true
