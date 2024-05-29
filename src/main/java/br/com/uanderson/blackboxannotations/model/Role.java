@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_role")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
