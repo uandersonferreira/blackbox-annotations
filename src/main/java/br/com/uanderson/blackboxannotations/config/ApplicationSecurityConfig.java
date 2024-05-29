@@ -31,6 +31,7 @@ public class ApplicationSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);//desabilitando o CSRF
         http.authorizeHttpRequests(auth -> auth
                     .requestMatchers("/css/**", "/js/**","/imagens/**", "/webjars/**").permitAll()
+                        .requestMatchers("https://cdn.tiny.cloud/1/0ay3sij1cm0sdyn1bm3r95jrnhisbwg8kguyvxh82yqsmh4x/tinymce/6/tinymce.min.js").permitAll()
                     .requestMatchers("/login/**").permitAll()
                     .requestMatchers(HttpMethod.POST,"/funcionario/login-registrar/save").permitAll()
                     .requestMatchers("/", "/home").permitAll()

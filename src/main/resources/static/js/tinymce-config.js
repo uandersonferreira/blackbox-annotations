@@ -5,7 +5,7 @@ const example_image_upload_handler = (blobInfo,  success, failure) => new Promis
 
     xhr = new XMLHttpRequest();
     xhr.withCredentials = false;
-    xhr.open('POST', 'http://localhost:8080/upload/image');
+    xhr.open('POST', 'http://${APP_HOST}/upload/image');
 
     xhr.onload = function () {
         var json;
